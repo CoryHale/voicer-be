@@ -11,7 +11,7 @@ const authRouter = require('../auth/authRouter.js');
 
 server.use(cors());
 server.use(express.json());
-server.use('/auth', authRouter);
+server.use('/api/auth', authRouter);
 
 
 module.exports = server;
