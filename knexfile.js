@@ -44,6 +44,16 @@ module.exports = {
     seeds: {
       directory: './data/seeds'
     }
-  }
+  },
+  
+  test: "jest --watch --verbose",
+    testing: {
+      client: 'postgresql',
+      connection: {
+        database: 'my_db',
+        user:     'username',
+        password: 'password'
+      },
+    }
 
 };
