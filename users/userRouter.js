@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const Users = require('./user-model.js');
+const Users = require('./userModel.js');
 
 module.exports = router;
