@@ -2,18 +2,18 @@ module.exports = {
 
   development: {
     client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
+    connection: 'postgres://localhost/voicerDB',
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds/development'
+    },
+    useNullAsDefault: true
   },
 
   staging: {
@@ -27,8 +27,9 @@ module.exports = {
       directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds'
-    }
+      directory: './data/seeds/staging'
+    },
+    useNullAsDefault: true
   },
 
   production: {
@@ -42,18 +43,21 @@ module.exports = {
       directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds'
-    }
+      directory: './data/seeds/production'
+    },
+    useNullAsDefault: true
   },
   
   test: "jest --watch --verbose",
     testing: {
       client: 'postgresql',
-      connection: {
-        database: 'my_db',
-        user:     'username',
-        password: 'password'
+      connection: 'postgres://localhost/voicerTest',
+      migrations: {
+        directory: './data/migrations'
       },
+      seeds: {
+        directory: './data/seeds/production'
+      },
+      useNullAsDefault: true
     }
-
 };
