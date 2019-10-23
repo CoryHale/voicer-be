@@ -10,8 +10,9 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-server.get('/login', (req, res) => {
-  res.status(200).send('<h1>Login endpoint</h1>')
+server.post('/api/login', (req, res) => {
+  let { username, password } = req.body;
+  res.status(200).json({message: `Welcome ${username}`});
 });
 
 module.exports = server;
