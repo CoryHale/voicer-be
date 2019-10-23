@@ -10,4 +10,8 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
+server.get('/login', (req, res) => {
+  res.status(200).send('<h1>Login endpoint</h1>')
+});
+
 module.exports = server;
