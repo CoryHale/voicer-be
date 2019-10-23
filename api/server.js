@@ -7,12 +7,11 @@ const cors = require('cors');
 
 const server = express();
 
+const authRouter = require('../auth/authRouter.js');
+
 server.use(cors());
 server.use(express.json());
+server.use('/auth', authRouter);
 
-server.post('/api/login', (req, res) => {
-  let { username, password } = req.body;
-  res.status(200).json({message: `Welcome ${username}`});
-});
 
 module.exports = server;
