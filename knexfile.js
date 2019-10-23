@@ -1,8 +1,13 @@
 module.exports = {
 
   development: {
-    client: 'postgresql',
-    connection: 'postgres://localhost/voicerDB',
+    client: 'pg',
+    connection: {
+      host: process.env.DB_Host,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DEVELOPMENT
+    },
     pool: {
       min: 2,
       max: 10
@@ -17,7 +22,7 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
@@ -33,7 +38,7 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
@@ -50,8 +55,13 @@ module.exports = {
   
   test: "jest --watch --verbose",
     testing: {
-      client: 'postgresql',
-      connection: 'postgres://localhost/voicerTest',
+      client: 'pg',
+      connection: {
+        host: process.env.DB_Host,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_TESTING
+      },
       migrations: {
         directory: './data/migrations'
       },
