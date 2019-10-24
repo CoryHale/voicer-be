@@ -12,4 +12,3 @@ async function findBy(username) {
 async function addUser(user) {
   return await db('users').insert(user)
 }
-
