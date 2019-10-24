@@ -54,4 +54,33 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Get all jobs
+router.get('/', async (req, res) => {
+  try {
+    const jobs = await Jobs.getJobs();
+    res.json(jobs);
+  }
+  catch (err) {
+    res.status(500).json({ message: 'Could not find jobs' });
+  }
+});
+
+
+// Get job by id
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const selectedJob = await Jobs.getJobById(id);
+
+    if (selectedJob) {
+      res.json(selectedJob);
+    } else {
+      res.status(404).json({ message: 'Could not find job.' })
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find job.' });
+  }
+});
+
 module.exports = router;

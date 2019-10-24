@@ -39,8 +39,24 @@ const deleteJob = async (jobId) => {
     }
 }
 
+const getJobs = _ => {
+    return db('jobs');
+}
+
+const getJobById = async (jobId) => {
+  try{
+      const selectedJob = await db('jobs').where({ jobId }).first();
+      return (selectedJob) ? selectedJob : null;
+  }
+  catch {
+      return null;
+  }
+}
+
 module.exports = {
     addJob,
     updateJob,
-    deleteJob
+    deleteJob,
+    getJobs,
+    getJobById
 }
