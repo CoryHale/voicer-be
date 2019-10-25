@@ -8,12 +8,10 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DEVELOPMENT
-    },
+//    connection: `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/${process.env.DB_DEVELOPMENT}`,
+
+    connection: process.env.DATABASE_URL,
+
     pool: {
       min: 2,
       max: 10
