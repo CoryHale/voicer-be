@@ -44,3 +44,4 @@ exports.down = function(knex) {
         .dropTableIfExists('talentProfiles')
         .dropTableIfExists('users')
 };
+
