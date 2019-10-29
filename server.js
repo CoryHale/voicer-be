@@ -6,6 +6,7 @@ const userRouter = require('./users/userRouter.js')
 const authRouter = require('./auth/authRouter');
 const jobRouter = require('./jobs/jobRouter');
 const jobOfferRouter = require('./jobOffers/jobOfferRouter');
+const ClientProfileRouter = require('./clientProfiles/clientProfileRouter');
 
 const server = express();
 
@@ -17,6 +18,8 @@ server.use('/api/users', userRouter);
 server.use('/api/auth', authRouter);
 server.use('/api/jobs', jobRouter);
 server.use('/api/jobs', jobOfferRouter);
+server.use('/api/clients', ClientProfileRouter);
+
 
 server.get('/', (req, res) => {
     res.send('<h1>Backend API for Voicer</h1>');
