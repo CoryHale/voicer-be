@@ -6,7 +6,7 @@ module.exports = {
 }
 
 async function findBy(username) {
-  return await db('users').where(username);
+  return await db('users').where(username).first();
 }
 
 async function addUser(user) {

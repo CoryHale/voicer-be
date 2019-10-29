@@ -22,6 +22,7 @@ router.post('/login', async (req, res) => {
 
   try {
     const user = await Users.findBy({ username });
+
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = genToken(user);
       res.status(200).json({
@@ -36,18 +37,24 @@ router.post('/login', async (req, res) => {
   }
 });
 
-function genToken (user) {
+const genToken = user => {
   const payload = {
     subject: "user",
     userId: user.userId,
-    userName: user.userName
+    username: user.username
   }
 
+  console.log(payload)
+
   const secret = process.env.secret;
+
+  console.log(secret)
 
   const options = {
     expiresIn: '1h'
   }
+
+  console.log(options)
 
   return jwt.sign(payload, secret, options)
 }
