@@ -5,7 +5,7 @@ const ClientProfiles = require('./clientProfileModel.js');
 
 // /api/clients endpoint
 
-// FIXME: Add auth for all endpoints and verify user is the owner of the job
+// FIXME: Add auth for all endpoints and verify user is the owner
 
 // Insert client profile into db
 router.post('/', async ( req, res ) => {
@@ -30,7 +30,7 @@ router.put('/:id', async ( req, res ) => {
         res.status(201).json(updatedData)
     }
     catch(error) {
-        res.status(500).json({message: "Job offer could not be updated", error: error})
+        res.status(500).json({message: "Client profile could not be updated", error: error})
     }
 })
 
@@ -39,18 +39,18 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     
     try {
-      const deletedJobOffer = await JobOffers.deleteJobOffer(id);
+      const deletedProfile = await ClientProfiles.deleteClientProfile(id);
   
-      if (deletedJobOffer) {
-        res.status(201).json(deletedJobOffer);
+      if (deletedProfile) {
+        res.status(201).json(deletedProfile);
       }
       else {
-        res.status(404).json({ message: 'Could not delete job offer' });
+        res.status(404).json({ message: 'Could not delete client profile.' });
       }
     }
     
     catch (error) {
-      res.status(500).json({ message: 'Could not delete job offer', error: error });
+      res.status(500).json({ message: 'Could not delete client profile.', error: error });
     }
 });
 

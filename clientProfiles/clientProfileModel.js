@@ -28,7 +28,7 @@ const deleteClientProfile = async (clientId) => {
         const selectedProfile = await db('clientProfiles').where({ clientId }).first();
         if (!(selectedProfile)) return null;
 
-        const deletedProfile = await db('jobOffers').where({ clientId }).del();
+        const deletedProfile = await db('clientProfiles').where({ clientId }).del();
         if (!(deletedProfile)) return null;
         
         return selectedProfile;
