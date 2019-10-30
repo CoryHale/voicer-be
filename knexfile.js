@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   // The development and testing environments will be hosted on your local machine. Create a .env file and set the 5 connection variable values:
   //  DB_HOST - Your local server. Will probably be either localhost or 127.0.0.1
@@ -12,7 +14,6 @@ module.exports = {
     // example of DATABASE_URL to put in .env
     // "postgres://DB_USER:DB_PASSWORD@DB_HOST:5432/DB_DEVELOPMENT"
     connection: process.env.DATABASE_URL,
-
     pool: {
       min: 2,
       max: 10
