@@ -55,13 +55,16 @@ const getClientProfileById = async (clientId) => {
 
 const getClientProfileByUserId = async (userId) => {
     try{
-        const selectedProfile = await db('clientProfiles').where({ userId });
+        const selectedProfile = await
+        db('users as usr')
+        .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
+        .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'cliPro.clientId', 'cliPro.companyName')
         return (selectedProfile) ? selectedProfile : null;
     }
     catch {
         return null;
     }
-  }
+}
 
 module.exports = {
     addClientProfile,
