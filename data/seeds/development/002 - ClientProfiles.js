@@ -4,7 +4,7 @@ exports.seed = function(knex) {
   return knex('clientProfiles').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
+      return knex('clientProfiles').insert([
         {userId: 1, companyName: 'TestCompanyOne'},
         {userId: 2, companyName: 'TestCompanyTwo'},
       ]);
