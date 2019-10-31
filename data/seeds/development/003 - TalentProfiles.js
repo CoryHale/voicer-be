@@ -1,12 +1,12 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('clientProfiles').truncate()
+  return knex('talentProfiles').del()
     .then(function () {
       // Inserts seed entries
       return knex('table_name').insert([
-        {userId: 1, companyName: 'TestCompanyOne'},
-        {userId: 2, companyName: 'TestCompanyTwo'},
+        {userId: 3, language: 'English'},
+        {userId: 4, language: 'Japanese'}
       ]);
     });
 };
