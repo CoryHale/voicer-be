@@ -55,7 +55,11 @@ const getTalentProfileById = async (talentId) => {
 
 const getTalentProfileByUserId = async (userId) => {
     try{
-        const selectedProfile = await db('talentProfiles').where({ userId });
+        const selectedProfile = await
+        db('users as usr')
+        .join('talentProfiles as talPro', 'usr.userId', '=', 'talPro.userId')
+        .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'talPro.clientId', 'talPro.companyName')
+
         return (selectedProfile) ? selectedProfile : null;
     }
     catch {
