@@ -12,26 +12,33 @@ exports.up = function(knex) {
         })
         .createTable('talentProfiles', tbl => {
             tbl.increments('talentId');
-            tbl.integer('userId').unsigned().references('userId').inTable('users');
+            tbl.integer('userId').unsigned().notNullable()
+            tbl.foreign('userId').references('userId').inTable('users').onDelete('CASCADE');
             tbl.string('language').notNullable();
         })
         .createTable('clientProfiles', tbl => {
             tbl.increments('clientId');
-            tbl.integer('userId').unsigned().references('userId').inTable('users');
+            tbl.integer('userId').unsigned().notNullable()
+            tbl.foreign('userId').references('userId').inTable('users').onDelete('CASCADE');
             tbl.string('companyName').notNullable();
         })
         .createTable('jobs', tbl => {
             tbl.increments('jobId');
-            tbl.integer('clientId').unsigned().references('clientId').inTable('clientProfiles');
+            tbl.integer('clientId').unsigned().notNullable()
+            tbl.foreign('clientId').references('clientId').inTable('clientProfiles').onDelete('CASCADE');
             tbl.string('jobTitle').notNullable();
             tbl.string('jobDescription').notNullable();
         })
         .createTable('jobOffers', tbl => {
             tbl.increments('jobOfferId');
-            tbl.integer('jobId').unsigned().references('jobId').inTable('jobs');
-            tbl.integer('offeredById').unsigned().references('userId').inTable('users');
-            tbl.integer('offeredToId').unsigned().references('userId').inTable('users');
-            tbl.integer('previousOfferId').unsigned().references('jobOfferId').inTable('jobOffers');
+            tbl.integer('jobId').unsigned().notNullable()
+            tbl.foreign('jobId').references('jobId').inTable('jobs').onDelete('CASCADE');
+            tbl.integer('offeredById').unsigned().notNullable()
+            tbl.foreign('offeredById').references('userId').inTable('users').onDelete('CASCADE');
+            tbl.integer('offeredToId').unsigned().notNullable()
+            tbl.foreign('offeredToId').references('userId').inTable('users').onDelete('CASCADE');
+            tbl.integer('previousOfferId').unsigned().notNullable()
+            tbl.foreign('previousOfferId').references('jobOfferId').inTable('jobOffers').onDelete('CASCADE');
             tbl.string('status').notNullable();
         })
 };
