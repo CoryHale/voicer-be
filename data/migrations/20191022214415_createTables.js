@@ -17,18 +17,24 @@ exports.up = function(knex) {
       tbl
         .integer('userId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('userId')
         .references('userId')
-        .inTable('users');
-      tbl.string('biography');
+        .inTable('users')
+        .onDelete('CASCADE');
     })
-
     .createTable('clientProfiles', tbl => {
       tbl.increments('clientId');
       tbl
         .integer('userId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('userId')
         .references('userId')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       tbl.string('companyName').notNullable();
     })
     .createTable('jobs', tbl => {
@@ -36,8 +42,12 @@ exports.up = function(knex) {
       tbl
         .integer('clientId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('clientId')
         .references('clientId')
-        .inTable('clientProfiles');
+        .inTable('clientProfiles')
+        .onDelete('CASCADE');
       tbl.string('jobTitle').notNullable();
       tbl.string('jobDescription').notNullable();
     })
@@ -46,23 +56,39 @@ exports.up = function(knex) {
       tbl
         .integer('jobId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('jobId')
         .references('jobId')
-        .inTable('jobs');
+        .inTable('jobs')
+        .onDelete('CASCADE');
       tbl
         .integer('offeredById')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('offeredById')
         .references('userId')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       tbl
         .integer('offeredToId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('offeredToId')
         .references('userId')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       tbl
         .integer('previousOfferId')
         .unsigned()
+        .notNullable();
+      tbl
+        .foreign('previousOfferId')
         .references('jobOfferId')
-        .inTable('jobOffers');
+        .inTable('jobOffers')
+        .onDelete('CASCADE');
       tbl.string('status').notNullable();
     });
 };
