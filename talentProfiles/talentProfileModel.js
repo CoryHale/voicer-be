@@ -85,11 +85,14 @@ async function addLanguage(language) {
   return await db('languages').insert(language);
 }
 
+
 const updateLanguage = async (languageId, languageUpdate) => {
   try {
     const langCheck = await db('languages').where({ languageId });
   } catch (err) {
     return err;
+
+
   }
 };
 
