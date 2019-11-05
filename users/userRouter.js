@@ -3,4 +3,84 @@ const router = express.Router();
 
 const Users = require('./userModel.js');
 
+// /api/users endpoint
+
+// FIXME: Add auth for all endpoints and verify user is the owner of the user
+
+// Insert user into db
+router.post('/', async ( req, res ) => {
+    const userData = req.body;
+    
+    try {
+        await Users.addUser(userData);
+        res.status(201).json({message: "Added user!"})
+    }
+    catch(error) {
+        res.status(500).json({message: "User could not be added", error: error})
+    }
+})
+
+// Update existing user
+router.put('/:id', async ( req, res ) => {
+    const userData = req.body;
+    const { id } = req.params;
+
+    try {
+        const updatedData = await Users.updateUser(id, userData);
+        res.status(201).json(updatedData)
+    }
+    catch(error) {
+        res.status(500).json({message: "User could not be updated", error: error})
+    }
+})
+
+// Remove user from db
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+      const deletedUser = await Users.deleteUser(id);
+  
+      if (deletedUser) {
+        res.status(201).json(deletedUser);
+      }
+      else {
+        res.status(404).json({ message: 'Could not delete user' });
+      }
+    }
+    
+    catch (error) {
+      res.status(500).json({ message: 'Could not delete user', error: error });
+    }
+});
+
+// Get all users
+router.get('/', async (req, res) => {
+  try {
+    const users = await Users.getUsers();
+    res.json(users);
+  }
+  catch (err) {
+    res.status(500).json({ message: 'Could not find users' });
+  }
+});
+
+
+// Get user by id
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const selectedUser = await Users.getUserById(id);
+
+    if (selectedUser) {
+      res.json(selectedUser);
+    } else {
+      res.status(404).json({ message: 'Could not find user.' })
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find user.' });
+  }
+});
+
 module.exports = router;

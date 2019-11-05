@@ -59,7 +59,7 @@ const getTalentProfileByUserId = async (userId) => {
         db('users as usr')
         .join('talentProfiles as talPro', 'usr.userId', '=', 'talPro.userId')
         .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'talPro.clientId', 'talPro.companyName')
-
+        .where({ userId: userId } )
         return (selectedProfile) ? selectedProfile : null;
     }
     catch {
