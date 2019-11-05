@@ -89,12 +89,53 @@ async function addLanguage(language) {
     });
 }
 
-const updateLanguage = async (languageId, languageUpdate) => {
-  try {
-    const langCheck = await db('languages').where({ languageId });
-  } catch (err) {
-    return err;
-  }
+const deleteLanguage = async languageId => {
+  return await db('languages')
+    .where({ languageId })
+    .del()
+    .then(async () => {
+      return await db('languages');
+    });
+};
+
+const getAccents = async () => {
+  return await db('accents');
+};
+
+const addAccent = async accent => {
+  return await db('accents')
+    .insert(accent)
+    .then(async () => {
+      return await db('accents');
+    });
+};
+
+const deleteAccent = async accentId => {
+  return await db('accents')
+    .where({ accentId })
+    .del()
+    .then(async () => {
+      return await db('accents');
+    });
+};
+
+const getTalentLang = async () => {
+  return await db('talentLanguages');
+};
+
+const addTalentLang = async talentLang => {
+  return await db('talentLanguages').insert(talentLang);
+  // .then(async () => {
+  //   return await db('talentLanguages');
+  // });
+};
+
+const addTalentAccent = async talentAccent => {
+  return await db('talentAccents')
+    .insert(talentAccent)
+    .then(async () => {
+      return await db('talentAccents');
+    });
 };
 
 module.exports = {
@@ -106,5 +147,11 @@ module.exports = {
   getTalentProfileByUserId,
   getLanguages,
   addLanguage,
-  updateLanguage
+  deleteLanguage,
+  getAccents,
+  addAccent,
+  deleteAccent,
+  getTalentLang,
+  addTalentLang,
+  addTalentAccent
 };

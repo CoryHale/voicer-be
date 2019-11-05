@@ -98,6 +98,7 @@ router.post('/languages', async (req, res) => {
   }
 });
 
+//Get added languages
 router.get('/languages', async (req, res) => {
   try {
     const languages = await TalentProfiles.getLanguages();
@@ -110,6 +111,91 @@ router.get('/languages', async (req, res) => {
   }
 });
 
-router.post('/');
+//UPDATE language
+
+//DELETE languages
+
+router.delete('/languages/:id', async (req, res) => {
+  try {
+    const deleted = await TalentProfiles.deleteLanguage(req.params.id);
+    console.log(deleted);
+    res.status(200).json(deleted);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error deleting language' });
+  }
+});
+
+//ADD accent
+
+router.post('/accents', async (req, res) => {
+  try {
+    const accent = await TalentProfiles.addAccent(req.body);
+    res.status(201).json(accent);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'There was an error adding the accents' });
+  }
+});
+
+//GET accents
+
+router.get('/accents', async (req, res) => {
+  try {
+    const accents = await TalentProfiles.getAccents();
+    res.status(200).json(accents);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'There was an error retrieving accents' });
+  }
+});
+
+//DELETE accent
+
+router.delete('/accents/:id', async (req, res) => {
+  try {
+    const deleted = await TalentProfiles.deleteAccent(req.params.id);
+    console.log(deleted);
+    res.status(200).json(deleted);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error deleting accent' });
+  }
+});
+
+//ADD language to user
+
+router.post('/talentLanguage', async (req, res) => {
+  try {
+    const talentLang = await TalentProfiles.addTalentLang(req.body);
+    res.status(200).json(talentLang);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error adding Language to User' });
+  }
+});
+
+//Get all languages assigned to users
+
+router.get('/talentLanguage', async (req, res) => {
+  try {
+    const talentAccents = await TalentProfiles.getTalentLang();
+    res.status(200).json(talentAccents);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving talent languages' });
+  }
+});
+
+//ADD accent to user
+
+router.post('/talentAccent', async (req, res) => {
+  try {
+    const talentAccent = await TalentProfiles.addTalentAccent(req.body);
+    res.status(200).json(talentAccent);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error adding Accent to User' });
+  }
+});
 
 module.exports = router;

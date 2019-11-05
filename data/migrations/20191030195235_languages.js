@@ -11,8 +11,10 @@ exports.up = function(knex) {
       tbl
         .integer('languageId')
         .unsigned()
+        .notNullable()
         .references('languageId')
-        .inTable('languages');
+        .inTable('languages')
+        .onDelete('CASCADE');
     })
 
     .createTable('talentLanguages', tbl => {
@@ -20,12 +22,14 @@ exports.up = function(knex) {
       tbl
         .integer('userId')
         .unsigned()
+        .notNullable()
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
       tbl
         .integer('languageId')
         .unsigned()
+        .notNullable()
         .references('languageId')
         .inTable('languages')
         .onDelete('CASCADE');
@@ -35,12 +39,14 @@ exports.up = function(knex) {
       tbl
         .integer('userId')
         .unsigned()
+        .notNullable()
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
       tbl
         .integer('accentId')
         .unsigned()
+        .notNullable()
         .references('accentId')
         .inTable('accents')
         .onDelete('CASCADE');
