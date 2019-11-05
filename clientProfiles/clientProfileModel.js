@@ -57,8 +57,8 @@ const getClientProfileByUserId = async (userId) => {
     try{
         const selectedProfile = await
         db('users as usr')
-        .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
-        .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'cliPro.clientId', 'cliPro.companyName')
+        .join('clientProfiles as cliPro', 'usr.id', '=', 'cliPro.userId')
+        .select('usr.id', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'cliPro.clientId', 'cliPro.companyName')
         .where({ userId: userId } )
         return (selectedProfile) ? selectedProfile : null;
     }
