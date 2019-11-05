@@ -19,25 +19,31 @@ exports.up = function(knex) {
       tbl.increments('talentLanguageId');
       tbl
         .integer('userId')
+        .unsigned()
         .references('userId')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       tbl
         .integer('languageId')
         .unsigned()
         .references('languageId')
-        .inTable('languages');
+        .inTable('languages')
+        .onDelete('CASCADE');
     })
     .createTable('talentAccents', tbl => {
       tbl.increments('talentAccentId');
       tbl
         .integer('userId')
+        .unsigned()
         .references('userId')
-        .inTable('users');
+        .inTable('users')
+        .onDelete('CASCADE');
       tbl
         .integer('accentId')
         .unsigned()
         .references('accentId')
-        .inTable('accents');
+        .inTable('accents')
+        .onDelete('CASCADE');
     });
 };
 
