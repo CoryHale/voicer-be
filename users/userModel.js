@@ -53,6 +53,10 @@ const getUserById = async (userId) => {
   }
 }
 
+async function findBy(username) {
+  return await db('users').where(username).first();
+}
+
 module.exports = {
     addUser,
     updateUser,
