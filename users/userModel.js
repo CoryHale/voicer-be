@@ -62,5 +62,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getUsers,
-    getUserById
+    getUserById,
+    findBy
 }
