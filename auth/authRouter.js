@@ -41,7 +41,8 @@ const genToken = user => {
   const payload = {
     subject: "user",
     userId: user.userId,
-    username: user.username
+    username: user.username,
+    userType: user.userType
   }
 
   console.log(payload)
