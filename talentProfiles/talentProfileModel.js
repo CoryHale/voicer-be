@@ -130,12 +130,27 @@ const addTalentLang = async talentLang => {
   // });
 };
 
+const deleteTalentLang = async talentLangId => {
+  return await db('talentLanguages')
+    .where({ talentLanguageId: talentLangId })
+    .del();
+};
+
+const getTalentAccent = async () => {
+  return await db('talentAccents');
+};
+
 const addTalentAccent = async talentAccent => {
   return await db('talentAccents')
     .insert(talentAccent)
     .then(async () => {
       return await db('talentAccents');
     });
+};
+const deleteTalentAccent = async talentAccentId => {
+  return await db('talentAccents')
+    .where({ talentAccentId: talentAccentId })
+    .del();
 };
 
 module.exports = {
@@ -153,5 +168,9 @@ module.exports = {
   deleteAccent,
   getTalentLang,
   addTalentLang,
-  addTalentAccent
+  addTalentAccent,
+  deleteTalentLang,
+  addTalentAccent,
+  getTalentAccent,
+  deleteTalentAccent
 };

@@ -168,7 +168,7 @@ router.delete('/accents/:id', async (req, res) => {
 router.post('/talentLanguage', async (req, res) => {
   try {
     const talentLang = await TalentProfiles.addTalentLang(req.body);
-    res.status(200).json(talentLang);
+    res.status(200).json({ message: 'Language added to User' });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Error adding Language to User' });
@@ -179,10 +179,33 @@ router.post('/talentLanguage', async (req, res) => {
 
 router.get('/talentLanguage', async (req, res) => {
   try {
-    const talentAccents = await TalentProfiles.getTalentLang();
-    res.status(200).json(talentAccents);
+    const talentLanguage = await TalentProfiles.getTalentLang();
+    res.status(200).json(talentLanguage);
   } catch (err) {
     res.status(500).json({ message: 'Error retrieving talent languages' });
+  }
+});
+
+//DELETE language added to user
+router.delete('/talentLanguage/:id', async (req, res) => {
+  try {
+    const deleted = await TalentProfiles.deleteTalentLang(req.params.id);
+    console.log(deleted);
+    res.status(200).json({ message: 'Language removed from user' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error removing Languge from user' });
+  }
+});
+
+//GET Talents tied to Users
+
+router.get('/talentAccent', async (req, res) => {
+  try {
+    const talentAccent = await TalentProfiles.getTalentAccent();
+    res.status(200).json(talentAccent);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving talent accents' });
   }
 });
 
@@ -195,6 +218,17 @@ router.post('/talentAccent', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Error adding Accent to User' });
+  }
+});
+
+//DELETE accent from user
+router.delete('/talentAccent/:id', async (req, res) => {
+  try {
+    const talentAccent = await TalentProfiles.deleteTalentAccent(req.params.id);
+    res.status(200).json({ message: 'Accent Deleted from User' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error deleting Accent from User' });
   }
 });
 
