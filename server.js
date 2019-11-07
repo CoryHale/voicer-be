@@ -2,7 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const userRouter = require('./users/userRouter.js')
+const userRouter = require('./users/userRouter.js');
 const authRouter = require('./auth/authRouter');
 const jobRouter = require('./jobs/jobRouter');
 const jobOfferRouter = require('./jobOffers/jobOfferRouter');
@@ -20,9 +20,8 @@ server.use('/api/jobs', jobRouter);
 server.use('/api/jobs', jobOfferRouter);
 server.use('/api/clients', ClientProfileRouter);
 
-
 server.get('/', (req, res) => {
     res.send('<h1>Backend API for Voicer</h1>');
-})
+});
 
 module.exports = server;
