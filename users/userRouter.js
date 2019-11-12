@@ -21,7 +21,7 @@ router.post('/', async ( req, res ) => {
 })
 
 // Update existing user
-router.put('/:id', async ( req, res ) => {
+router.put('/:id', validateUser, async ( req, res ) => {
     const userData = req.body;
     const { id } = req.params;
 
@@ -35,7 +35,7 @@ router.put('/:id', async ( req, res ) => {
 })
 
 // Remove user from db
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', validateUser, async (req, res) => {
     const { id } = req.params;
     
     try {
@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Get all users
-router.get('/', async (req, res) => {
+router.get('/', validateUser, async (req, res) => {
   try {
     const users = await Users.getUsers();
     res.json(users);
@@ -67,7 +67,7 @@ router.get('/', async (req, res) => {
 
 
 // Get user by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', validateUser, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -82,5 +82,17 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Could not find user.' });
   }
 });
+
+// Validate Middleware
+
+function validateUser(req, res, next) {
+  const secret = req.body.secret;
+
+  if (secret === process.env.JWT_SECRET) {
+    next();
+  } else {
+    res.status(400).json({ message: 'unauthorized user: can not perform this action' })
+  }
+};
 
 module.exports = router;
