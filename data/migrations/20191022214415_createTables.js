@@ -37,7 +37,7 @@ exports.up = function(knex) {
             tbl.foreign('offeredById').references('userId').inTable('users').onDelete('CASCADE');
             tbl.integer('offeredToId').unsigned().notNullable()
             tbl.foreign('offeredToId').references('userId').inTable('users').onDelete('CASCADE');
-            tbl.integer('previousOfferId').unsigned().notNullable()
+            tbl.integer('previousOfferId').unsigned()
             tbl.foreign('previousOfferId').references('jobOfferId').inTable('jobOffers').onDelete('CASCADE');
             tbl.string('status').notNullable();
         })

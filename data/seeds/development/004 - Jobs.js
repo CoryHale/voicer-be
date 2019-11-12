@@ -6,8 +6,8 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('jobs').insert([
         {clientId: 1, jobTitle: 'Job One Title', jobDescription: 'Job One Description'},
-        {clientId: 1, jobTitle: 'Job Two Title', jobDescription: 'Job One Description'},
-        {clientId: 2, jobTitle: 'Job Two Title', jobDescription: 'Job One Description'},
+        {clientId: 1, jobTitle: 'Job Two Title', jobDescription: 'Job Two Description'},
+        {clientId: 2, jobTitle: 'Job Three Title', jobDescription: 'Job Three Description'},
       ]);
     });
 };
