@@ -42,7 +42,7 @@ module.exports = {
       directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds/staging'
+      directory: './data/seeds/development'
     },
     useNullAsDefault: true
   },
@@ -58,7 +58,7 @@ module.exports = {
       directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds/production'
+      directory: './data/seeds/development'
     },
     useNullAsDefault: true
   },
