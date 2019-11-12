@@ -31,7 +31,7 @@ exports.up = function(knex) {
         })
         .createTable('jobOffers', tbl => {
             tbl.increments('jobOfferId');
-            tbl.integer('jobId').unsigned().notNullable()
+            tbl.integer('jobId').unsigned().notNullable();
             tbl.foreign('jobId').references('jobId').inTable('jobs').onDelete('CASCADE');
             tbl.integer('offeredById').unsigned().notNullable()
             tbl.foreign('offeredById').references('userId').inTable('users').onDelete('CASCADE');
@@ -40,6 +40,7 @@ exports.up = function(knex) {
             tbl.integer('previousOfferId').unsigned()
             tbl.foreign('previousOfferId').references('jobOfferId').inTable('jobOffers').onDelete('CASCADE');
             tbl.string('status').notNullable();
+            tbl.string('clientMessage');
         })
 };
 
