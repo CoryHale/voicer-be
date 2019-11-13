@@ -83,13 +83,13 @@ exports.up = function(knex) {
       tbl
         .integer('previousOfferId')
         .unsigned()
-        .notNullable();
       tbl
         .foreign('previousOfferId')
         .references('jobOfferId')
         .inTable('jobOffers')
         .onDelete('CASCADE');
       tbl.string('status').notNullable();
+      tbl.string('clientMessage');
     });
 };
 
