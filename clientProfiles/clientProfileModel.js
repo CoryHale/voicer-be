@@ -67,11 +67,21 @@ const getClientProfileByUserId = async (userId) => {
     }
 }
 
+const getJobsByClientId = async (clientId) => {
+    try {
+        const jobs = await db('jobs').where({clientId})
+        return jobs;
+    } catch(err) {
+        return null;
+    }
+}
+
 module.exports = {
     addClientProfile,
     updateClientProfile,
     deleteClientProfile,
     getClientProfiles,
     getClientProfileById,
-    getClientProfileByUserId
+    getClientProfileByUserId,
+    getJobsByClientId
 }
