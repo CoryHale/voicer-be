@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const Users = require('./userModel.js');
 
@@ -55,15 +56,15 @@ router.delete('/:id', validateUser, async (req, res) => {
 });
 
 // Get all users
-router.get('/', validateUser, async (req, res) => {
-  try {
-    const users = await Users.getUsers();
-    res.json(users);
-  }
-  catch (err) {
-    res.status(500).json({ message: 'Could not find users' });
-  }
-});
+// router.get('/', validateUser, async (req, res) => {
+//   try {
+//     const users = await Users.getUsers();
+//     res.json(users);
+//   }
+//   catch (err) {
+//     res.status(500).json({ message: 'Could not find users' });
+//   }
+// });
 
 
 // Get user by id
@@ -86,7 +87,7 @@ router.get('/:id', validateUser, async (req, res) => {
 // Validate Middleware
 
 function validateUser(req, res, next) {
-  const secret = req.body.secret;
+  const userId = jwt.decode(localStorage.getItem("token")).userId;
 
   if (secret === process.env.JWT_SECRET) {
     next();
