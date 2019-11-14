@@ -87,9 +87,10 @@ router.get('/:id', validateUser, async (req, res) => {
 // Validate Middleware
 
 function validateUser(req, res, next) {
-  const userId = jwt.decode(localStorage.getItem("token")).userId;
+  const tokenId = jwt.decode(localStorage.getItem("token")).userId;
+  const {id} = req.params
 
-  if (secret === process.env.JWT_SECRET) {
+  if (tokenId === id) {
     next();
   } else {
     res.status(400).json({ message: 'unauthorized user: can not perform this action' })
