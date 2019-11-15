@@ -20,8 +20,15 @@ router.post('/register', async ( req, res ) => {
 router.post('/login', async (req, res) => {
   let { username, password } = req.body;
 
+  console.log("Username:", username)
+  console.log("Password:", password)
+
   try {
     const user = await Users.findBy({ username });
+
+    console.log("User:", user)
+
+
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = genToken(user);
@@ -33,6 +40,9 @@ router.post('/login', async (req, res) => {
       res.status(401).json({ message: 'Invalid Credentials' });
     }
   } catch(error) {
+
+    console.log("Error:", error);
+
     res.status(500).json({message: "Error logging in user", error: error})
   }
 });
