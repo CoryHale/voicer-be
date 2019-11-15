@@ -59,9 +59,19 @@ const getClientProfileByUserId = async (userId) => {
         db('users as usr')
         .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
         .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'cliPro.clientId', 'cliPro.companyName')
+        .where({ "usr.userId": userId })
         return (selectedProfile) ? selectedProfile : null;
     }
     catch {
+        return null;
+    }
+}
+
+const getJobsByClientId = async (clientId) => {
+    try {
+        const jobs = await db('jobs').where({clientId})
+        return jobs;
+    } catch(err) {
         return null;
     }
 }
@@ -72,5 +82,6 @@ module.exports = {
     deleteClientProfile,
     getClientProfiles,
     getClientProfileById,
-    getClientProfileByUserId
+    getClientProfileByUserId,
+    getJobsByClientId
 }

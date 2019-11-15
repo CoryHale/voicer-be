@@ -10,7 +10,6 @@ const JobOffers = require('./jobOfferModel.js');
 // Insert job offer into db
 router.post('/:jobId/offers', async ( req, res ) => {
     const jobOfferData = req.body;
-    
     try {
         await JobOffers.addJobOffer(jobOfferData);
         res.status(201).json({message: "Added job offer!"})
