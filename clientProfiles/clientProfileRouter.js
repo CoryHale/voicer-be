@@ -82,4 +82,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//Get jobs by clientId
+router.get('/:clientId/jobs', async (req, res) => {
+  const {clientId} = req.params
+  try {
+    const jobs = await ClientProfiles.getJobsByClientId(clientId)
+    res.status(200).json(jobs)
+  } catch(err) {
+    res.status(500).json({message: "Could not get Jobs", error: err})
+  }
+})
+
 module.exports = router;
