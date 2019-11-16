@@ -2,6 +2,7 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('userId');
+      tbl.string('gender');
       tbl.string('username').notNullable();
       tbl.string('password').notNullable();
       tbl.string('userType').notNullable();
@@ -11,7 +12,6 @@ exports.up = function(knex) {
         .unique();
       tbl.string('firstName').notNullable();
       tbl.string('lastName').notNullable();
-      tbl.string('gender');
     })
     .createTable('talentProfiles', tbl => {
       tbl.increments('talentId');
