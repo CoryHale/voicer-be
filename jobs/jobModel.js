@@ -1,6 +1,8 @@
 const db = require('../data/dbConfig.js');
 
 const addJob = async (job) => {
+    let createdDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    job['createdDate'] = createdDate;
     return await db('jobs').insert(job)
 }
 
@@ -40,7 +42,7 @@ const deleteJob = async (jobId) => {
 }
 
 const getJobs = _ => {
-    return db('jobs');
+    return db('jobs as j').join('clientProfiles as cp', 'cp.clientId', '=', 'j.clientId').join('users as u', 'u.userId', '=', 'cp.userId');
 }
 
 const getJobById = async (jobId) => {

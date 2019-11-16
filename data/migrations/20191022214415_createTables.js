@@ -2,6 +2,7 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('userId');
+      tbl.string('gender');
       tbl.string('username').notNullable();
       tbl.string('password').notNullable();
       tbl.string('userType').notNullable();
@@ -23,6 +24,7 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
+      tbl.integer('rating');
     })
     .createTable('clientProfiles', tbl => {
       tbl.increments('clientId');
@@ -35,6 +37,7 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
+      tbl.integer('rating');
       tbl.string('companyName').notNullable();
     })
     .createTable('jobs', tbl => {
@@ -50,6 +53,8 @@ exports.up = function(knex) {
         .onDelete('CASCADE');
       tbl.string('jobTitle').notNullable();
       tbl.string('jobDescription').notNullable();
+      tbl.string('createdDate').notNullable();
+      tbl.string('initialPrice').notNullable();
     })
     .createTable('jobOffers', tbl => {
       tbl.increments('jobOfferId');
@@ -101,3 +106,5 @@ exports.down = function(knex) {
     .dropTableIfExists('talentProfiles')
     .dropTableIfExists('users');
 };
+
+// Languages/Accents 
