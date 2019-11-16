@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../users/userModel');
+const TalentRouter = require('../talentProfiles/talentProfileModel');
 
 router.post('/register', async (req, res) => {
   const user = req.body;
@@ -36,6 +37,24 @@ router.post('/login', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Error logging in user', error: error });
+  }
+});
+
+router.get('/languages', async (req, res) => {
+  try {
+    const languages = await TalentRouter.getTalentLang();
+    res.status(200).json(languages);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving languages' });
+  }
+});
+
+router.get('/accents', async (req, res) => {
+  try {
+    const accents = await TalentRouter.getAccents();
+    res.status(200).json(accents);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving accents' });
   }
 });
 
