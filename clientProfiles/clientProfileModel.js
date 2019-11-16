@@ -4,15 +4,15 @@ const addClientProfile = async (profile) => {
     return await db('clientProfiles').insert(profile)
 }
 
-const updateClientProfile = async (clientId, profileData) => {
+const updateClientProfile = async (userId, profileData) => {
     try {
-        const checkForProfile = await db('clientProfiles').where({ clientId });
+        const checkForProfile = await db('clientProfiles').where({ userId });
         if (!(checkForProfile)) return null;
         
-        const updatedProfile = await db('clientProfiles').where({ clientId }).update(profileData);
+        const updatedProfile = await db('clientProfiles').where({ userId }).update(profileData);
         if (!(updatedProfile)) return null;
 
-        const selectUpdatedProfile = await db('clientProfiles').where({ clientId });
+        const selectUpdatedProfile = await db('clientProfiles').where({ userId });
         if (!(selectUpdatedProfile)) return null;
 
         return selectUpdatedProfile;
