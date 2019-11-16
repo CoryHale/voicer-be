@@ -18,6 +18,8 @@ exports.up = function(knex) {
         .integer('userId')
         .unsigned()
         .notNullable();
+      tbl.string('gender');
+      tbl.string('voiceAge');
       tbl
         .foreign('userId')
         .references('userId')
@@ -80,9 +82,7 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
-      tbl
-        .integer('previousOfferId')
-        .unsigned()
+      tbl.integer('previousOfferId').unsigned();
       tbl
         .foreign('previousOfferId')
         .references('jobOfferId')
