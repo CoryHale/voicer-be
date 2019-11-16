@@ -42,10 +42,25 @@ router.post('/login', async (req, res) => {
 
 router.get('/languages', async (req, res) => {
   try {
-    const languages = await TalentRouter.getTalentLang();
+    const languages = await TalentRouter.getLanguages();
     res.status(200).json(languages);
   } catch (err) {
-    res.status(500).json({ message: 'Error retrieving languages' });
+    console.log(err);
+    res
+      .status(500)
+      .json({ message: 'There was an error retrieving languages' });
+  }
+});
+
+router.get('/languages', async (req, res) => {
+  try {
+    const languages = await TalentRouter.getLanguages();
+    res.status(200).json(languages);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ message: 'There was an error retrieving languages' });
   }
 });
 
