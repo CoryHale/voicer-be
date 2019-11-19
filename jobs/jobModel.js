@@ -40,7 +40,8 @@ const deleteJob = async (jobId) => {
 }
 
 const getJobs = _ => {
-    return db('jobs');
+  // return db('jobs');
+  return db('jobs as j').join('clientProfiles as cp', 'cp.clientId', '=', 'j.clientId');
 }
 
 const getJobById = async (jobId) => {
