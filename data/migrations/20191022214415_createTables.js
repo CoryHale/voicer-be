@@ -68,32 +68,26 @@ exports.up = function(knex) {
         .inTable('jobs')
         .onDelete('CASCADE');
       tbl
-        .integer('offeredById')
+        .integer('clientId')
         .unsigned()
         .notNullable();
       tbl
-        .foreign('offeredById')
+        .foreign('clientId')
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
       tbl
-        .integer('offeredToId')
+        .integer('talentId')
         .unsigned()
         .notNullable();
       tbl
-        .foreign('offeredToId')
+        .foreign('talentId')
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
-      tbl
-        .integer('previousOfferId')
-        .unsigned()
-      tbl
-        .foreign('previousOfferId')
-        .references('jobOfferId')
-        .inTable('jobOffers')
-        .onDelete('CASCADE');
+      tbl.boolean('isClientOffer').notNullable();
       tbl.string('status').notNullable();
+      tbl.timestamp('createdAt', { useTz: false });
       tbl.string('clientMessage');
     });
 };
