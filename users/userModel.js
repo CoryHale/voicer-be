@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig.js');
 
-const addUser = async (job) => {
-    return await db('users').insert(job)
+const addUser = async (user) => {
+    return await db('users').insert(user)
 }
 
 const updateUser = async (userId, newData) => {
