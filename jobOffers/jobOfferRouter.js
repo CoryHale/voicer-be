@@ -68,17 +68,11 @@ router.delete('/:jobId/offers/:id', async (req, res) => {
 // Get all job offers
 router.get('/:jobId/offers', async (req, res) => {
   const { jobId } = req.params;
-  console.log(jobId)
   try {
     const selectedJobOffers = await JobOffers.getJobOffersByJobId(jobId);
-    console.log(selectedJobOffers)
-    if (selectedJobOffers.length) {
-      res.json(selectedJobOffers);
-    } else {
-      res.status(404).json({ message: 'Could not find job offers.' })
-    }
+    res.status(200).json(selectedJobOffers);
   } catch (err) {
-    res.status(500).json({ message: 'Could not find job offers.' });
+    res.status(500).json({ message: 'Could not find job offers.', error: err});
   }
 
 });
@@ -97,7 +91,7 @@ router.get('/:jobId/offers/:id', async (req, res) => {
       res.status(404).json({ message: 'Could not find job offer.' })
     }
   } catch (err) {
-    res.status(500).json({ message: 'Could not find job offer.' });
+    res.status(500).json({ message: 'Could not find job offer.', error: err});
   }
 });
 
