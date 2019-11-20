@@ -76,7 +76,7 @@ router.get('/profile/:id', async (req, res) => {
     const selectedTalentProfile = await TalentProfiles.getTalentProfileByUserId(
       id
     );
-
+    console.log(selectedTalentProfile);
     if (selectedTalentProfile) {
       res.json(selectedTalentProfile);
     } else {
