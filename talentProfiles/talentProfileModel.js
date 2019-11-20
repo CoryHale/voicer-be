@@ -80,7 +80,7 @@ const getTalentProfileByUserId = async userId => {
         'talPro.companyName'
       ).where({ "usr.userId": userId });
 
-    return selectedProfile ? selectedProfile : null;
+    return (selectedProfile) ? selectedProfile : null;
   } catch {
     return null;
   }
