@@ -68,10 +68,8 @@ router.delete('/:jobId/offers/:id', async (req, res) => {
 // Get all job offers
 router.get('/:jobId/offers', async (req, res) => {
   const { jobId } = req.params;
-  console.log(jobId)
   try {
     const selectedJobOffers = await JobOffers.getJobOffersByJobId(jobId);
-    console.log(selectedJobOffers)
     if (selectedJobOffers.length) {
       res.json(selectedJobOffers);
     } else {
