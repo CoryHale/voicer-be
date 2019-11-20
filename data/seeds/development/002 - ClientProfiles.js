@@ -5,8 +5,8 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('clientProfiles').insert([
-        {userId: 1, companyName: 'TestCompanyOne'},
-        {userId: 2, companyName: 'TestCompanyTwo'},
+        {userId: 1, companyName: 'TestCompanyOne', rating: 3},
+        {userId: 2, companyName: 'TestCompanyTwo', rating: 3},
       ]);
     });
 };

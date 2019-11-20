@@ -11,7 +11,8 @@ exports.seed = function(knex) {
           userType: 'client',
           email: 'TestClientOne@test.com',
           firstName: 'Client',
-          lastName: 'One'
+          lastName: 'One',
+          gender: 'Male'
         },
         {
           username: 'TestClientTwo',
@@ -19,7 +20,8 @@ exports.seed = function(knex) {
           userType: 'client',
           email: 'TestClientTwo@test.com',
           firstName: 'Client',
-          lastName: 'Two'
+          lastName: 'Two',
+          gender: 'Female'
         },
         {
           username: 'TestTalentOne',
@@ -27,7 +29,8 @@ exports.seed = function(knex) {
           userType: 'talent',
           email: 'TestTalentOne@test.com',
           firstName: 'Talent',
-          lastName: 'One'
+          lastName: 'One',
+          gender: 'Male'
         },
         {
           username: 'TestTalentTwo',
@@ -35,7 +38,8 @@ exports.seed = function(knex) {
           userType: 'talent',
           email: 'TestTalentTwo@test.com',
           firstName: 'Talent',
-          lastName: 'Two'
+          lastName: 'Two',
+          gender: 'Binary'
         }
       ]);
     });

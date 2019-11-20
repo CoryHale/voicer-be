@@ -4,6 +4,9 @@ exports.seed = function(knex) {
     .del()
     .then(function() {
       // Inserts seed entries
-      return knex('talentProfiles').insert([{ userId: 3 }, { userId: 4 }]);
+      return knex('talentProfiles').insert([
+        { userId: 3, rating: 3 },
+        { userId: 4, rating: 3 }
+      ]);
     });
 };

@@ -2,6 +2,7 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('userId');
+      tbl.string('gender');
       tbl.string('username').notNullable();
       tbl.string('password').notNullable();
       tbl.string('userType').notNullable();
@@ -25,6 +26,7 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
+      tbl.integer('rating');
     })
     .createTable('clientProfiles', tbl => {
       tbl.increments('clientId');
@@ -37,6 +39,7 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
+      tbl.integer('rating');
       tbl.string('companyName').notNullable();
     })
     .createTable('jobs', tbl => {
@@ -52,6 +55,9 @@ exports.up = function(knex) {
         .onDelete('CASCADE');
       tbl.string('jobTitle').notNullable();
       tbl.string('jobDescription').notNullable();
+      tbl.string('createdDate').notNullable();
+      tbl.string('initialPrice').notNullable();
+      tbl.string('status').notNullable();
     })
     .createTable('jobOffers', tbl => {
       tbl.increments('jobOfferId');
@@ -65,30 +71,26 @@ exports.up = function(knex) {
         .inTable('jobs')
         .onDelete('CASCADE');
       tbl
-        .integer('offeredById')
+        .integer('clientId')
         .unsigned()
         .notNullable();
       tbl
-        .foreign('offeredById')
+        .foreign('clientId')
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
       tbl
-        .integer('offeredToId')
+        .integer('talentId')
         .unsigned()
         .notNullable();
       tbl
-        .foreign('offeredToId')
+        .foreign('talentId')
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
-      tbl.integer('previousOfferId').unsigned();
-      tbl
-        .foreign('previousOfferId')
-        .references('jobOfferId')
-        .inTable('jobOffers')
-        .onDelete('CASCADE');
+      tbl.boolean('isClientOffer').notNullable();
       tbl.string('status').notNullable();
+      tbl.timestamp('createdAt', { useTz: false });
       tbl.string('clientMessage');
     });
 };
@@ -101,3 +103,5 @@ exports.down = function(knex) {
     .dropTableIfExists('talentProfiles')
     .dropTableIfExists('users');
 };
+
+// Languages/Accents

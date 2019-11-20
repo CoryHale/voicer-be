@@ -10,7 +10,6 @@ const Jobs = require('./jobModel.js');
 // Insert job into db
 router.post('/', async ( req, res ) => {
     const jobData = req.body;
-    
     try {
         await Jobs.addJob(jobData);
         res.status(201).json({message: "Added job!"})
@@ -56,6 +55,7 @@ router.delete('/:id', async (req, res) => {
 
 // Get all jobs
 router.get('/', async (req, res) => {
+
   try {
     const jobs = await Jobs.getJobs();
     res.json(jobs);
