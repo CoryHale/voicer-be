@@ -55,6 +55,7 @@ exports.up = function(knex) {
       tbl.string('jobDescription').notNullable();
       tbl.string('createdDate').notNullable();
       tbl.string('initialPrice').notNullable();
+      tbl.string('status').notNullable();
     })
     .createTable('jobOffers', tbl => {
       tbl.increments('jobOfferId');
