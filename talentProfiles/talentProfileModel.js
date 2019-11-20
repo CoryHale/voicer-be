@@ -76,11 +76,10 @@ const getTalentProfileByUserId = async userId => {
         'usr.email',
         'usr.firstName',
         'usr.lastName',
-        'talPro.clientId',
-        'talPro.companyName'
+        'talPro.talentId'
       ).where({ "usr.userId": userId });
 
-    return selectedProfile ? selectedProfile : null;
+    return (selectedProfile) ? selectedProfile : null;
   } catch {
     return null;
   }
