@@ -3,6 +3,7 @@ const db = require('../data/dbConfig.js');
 const addJob = async (job) => {
     let createdDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
     job['createdDate'] = createdDate;
+    job['status'] = 'Hiring'
     return await db('jobs').insert(job)
 }
 
@@ -41,8 +42,11 @@ const deleteJob = async (jobId) => {
     }
 }
 
-const getJobs = _ => {
-    return db('jobs as j').join('clientProfiles as cp', 'cp.clientId', '=', 'j.clientId').join('users as u', 'u.userId', '=', 'cp.userId');
+const getJobs = () => {
+    return db('jobs as j')
+    .join('clientProfiles as cp', 'cp.clientId', '=', 'j.clientId')
+    .join('users as u', 'u.userId', '=', 'cp.userId')
+    .select('u.firstName', 'u.lastName', 'u.userId', 'u.email', 'cp.clientId', 'cp.companyName', 'cp.rating', 'j.jobId', 'j.jobDescription', 'j.jobTitle', 'j.initialPrice', 'j.createdDate');
 }
 
 const getJobById = async (jobId) => {
