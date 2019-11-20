@@ -55,6 +55,7 @@ router.delete('/:id', async (req, res) => {
 
 // Get all jobs
 router.get('/', async (req, res) => {
+
   try {
     const jobs = await Jobs.getJobs();
     res.json(jobs);
