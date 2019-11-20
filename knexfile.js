@@ -33,7 +33,12 @@ module.exports = {
 
   staging: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_TESTING
+    },
     pool: {
       min: 2,
       max: 10
@@ -65,7 +70,12 @@ module.exports = {
   
   testing: {
     client: 'pg',
-    connection: process.env.DATABASE_URL_TESTING,
+    connection: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_TESTING
+    },
     migrations: {
       directory: './data/migrations'
     },
