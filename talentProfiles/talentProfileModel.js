@@ -42,7 +42,16 @@ const deleteTalentProfile = async talentId => {
 };
 
 const getTalentProfiles = _ => {
-  return db('talentProfiles');
+  return db('talentProfiles as tp')
+    .join('users as u', 'u.userId', '=', 'tp.userId')
+    .select(
+      'tp.talentId',
+      'u.userId',
+      'u.username',
+      'u.firstName',
+      'u.lastName',
+      'u.email'
+    )
 };
 
 const getTalentProfileById = async talentId => {
