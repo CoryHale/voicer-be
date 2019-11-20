@@ -77,6 +77,30 @@ router.get('/:jobId/offers', async (req, res) => {
 
 });
 
+// Get all job offers by talent ID
+router.get('/:jobId/talent/offers', async (req, res) => {
+  const { talentId } = req.params;
+  try {
+    const selectedJobOffers = await JobOffers.getJobOffersByClientId(talentId);
+    res.status(200).json(selectedJobOffers);
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find job offers.' });
+  }
+
+});
+
+// Get all job offers by client ID
+router.get('/:jobId/client/offers', async (req, res) => {
+  const { clientId } = req.params;
+  try {
+    const selectedJobOffers = await JobOffers.getJobOffersByTalentId(clientId);
+    res.status(200).json(selectedJobOffers);
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find job offers.' });
+  }
+
+});
+
 
 // Get job offer by id
 router.get('/:jobId/offers/:id', async (req, res) => {

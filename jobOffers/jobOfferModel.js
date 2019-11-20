@@ -61,7 +61,27 @@ const getJobOffersByJobId = async (jobId) => {
     catch {
         return null;
     }
-  }
+}
+
+const getJobOffersByClientId = async (clientId) => {
+    try{
+        const offers = await db('jobOffers').where({clientId})
+        return offers
+    }
+    catch {
+        return null;
+    }
+}
+
+const getJobOffersByTalentId = async (talentId) => {
+    try{
+        const offers = await db('jobOffers').where({talentId})
+        return offers
+    }
+    catch {
+        return null;
+    }
+}
 
 module.exports = {
     addJobOffer,
@@ -69,5 +89,7 @@ module.exports = {
     deleteJobOffer,
     getJobOffers,
     getJobOfferById,
-    getJobOffersByJobId
+    getJobOffersByJobId,
+    getJobOffersByClientId,
+    getJobOffersByTalentId
 }
