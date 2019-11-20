@@ -79,7 +79,7 @@ router.get('/:jobId/offers', async (req, res) => {
 
 // Get all job offers by talent ID
 router.get('/talent/offers', async (req, res) => {
-  const { talentId } = req.params;
+  const { talentId } = req.body;
   try {
     const selectedJobOffers = await JobOffers.getJobOffersByClientId(talentId);
     res.status(200).json(selectedJobOffers);
@@ -91,7 +91,7 @@ router.get('/talent/offers', async (req, res) => {
 
 // Get all job offers by client ID
 router.get('/client/offers', async (req, res) => {
-  const { clientId } = req.params;
+  const { clientId } = req.body;
   try {
     const selectedJobOffers = await JobOffers.getJobOffersByTalentId(clientId);
     res.status(200).json(selectedJobOffers);
