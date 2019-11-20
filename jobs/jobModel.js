@@ -41,7 +41,7 @@ const deleteJob = async (jobId) => {
     }
 }
 
-const getJobs = _ => {
+const getJobs = () => {
     return db('jobs as j')
     .join('clientProfiles as cp', 'cp.clientId', '=', 'j.clientId')
     .join('users as u', 'u.userId', '=', 'cp.userId')
