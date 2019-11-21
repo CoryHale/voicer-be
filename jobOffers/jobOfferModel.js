@@ -39,7 +39,7 @@ const deleteJobOffer = async (jobOfferId) => {
     }
 }
 
-const getJobOffers = _ => {
+const getJobOffers = () => {
     return db('jobOffers');
 }
 
@@ -65,7 +65,7 @@ const getJobOffersByJobId = async (jobId) => {
 
 const getJobOffersByClientId = async (clientId) => {
     try{
-        const offers = await db('jobOffers').where({clientId})
+        const offers = await db('jobOffers').where({ clientId })
         return offers
     }
     catch {
@@ -74,8 +74,9 @@ const getJobOffersByClientId = async (clientId) => {
 }
 
 const getJobOffersByTalentId = async (talentId) => {
+    console.log('hi')
     try{
-        const offers = await db('jobOffers').where({talentId})
+        const offers = await db('jobOffers').where({ talentId })
         return offers
     }
     catch {
