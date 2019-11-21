@@ -19,7 +19,7 @@ server.use(cors());
 server.use("/api/users", restricted, userRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/jobs", restricted, jobRouter);
-server.use("/api/jobs", restricted, jobOfferRouter);
+server.use("/api/joboffers", restricted, jobOfferRouter);
 server.use("/api/clients", restricted, ClientProfileRouter);
 server.use("/api/talents", restricted, talentProfileRouter);
 
