@@ -74,8 +74,8 @@ exports.up = function(knex) {
         .notNullable();
       tbl
         .foreign('clientId')
-        .references('userId')
-        .inTable('users')
+        .references('clientId')
+        .inTable('clientProfiles')
         .onDelete('CASCADE');
       tbl
         .integer('talentId')
@@ -83,8 +83,8 @@ exports.up = function(knex) {
         .notNullable();
       tbl
         .foreign('talentId')
-        .references('userId')
-        .inTable('users')
+        .references('talentId')
+        .inTable('talentProfiles')
         .onDelete('CASCADE');
       tbl.boolean('isClientOffer').notNullable();
       tbl.string('status').notNullable();

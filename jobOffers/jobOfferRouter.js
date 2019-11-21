@@ -81,9 +81,7 @@ router.get('/:jobId/offers', async (req, res) => {
 router.get('/talent/:talentId/offers', async (req, res) => {
   const { talentId } = req.params;
   try {
-    console.log('talentId : ' + talentId)
-    const selectedJobOffers = await JobOffers.getJobOffersByClientId(talentId);
-    console.log(selectedJobOffers)
+    const selectedJobOffers = await JobOffers.getJobOffersByTalentId(talentId);
     res.status(200).json(selectedJobOffers);
   } catch (err) {
     res.status(500).json({ message: 'Could not find job offers.' });
@@ -95,7 +93,7 @@ router.get('/talent/:talentId/offers', async (req, res) => {
 router.get('/client/:clientId/offers', async (req, res) => {
   const { clientId } = req.params;
   try {
-    const selectedJobOffers = await JobOffers.getJobOffersByTalentId(clientId);
+    const selectedJobOffers = await JobOffers.getJobOffersByClientId(clientId);
     res.status(200).json(selectedJobOffers);
   } catch (err) {
     res.status(500).json({ message: 'Could not find job offers.' });
