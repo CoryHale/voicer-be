@@ -79,6 +79,7 @@ router.get('/:jobId/offers', async (req, res) => {
 
 // Get all job offers by talent ID
 router.get('/talent/offers', async (req, res) => {
+  console.log(req.body)
   const { talentId } = req.body;
   try {
     console.log('talentId : ' + talentId)
