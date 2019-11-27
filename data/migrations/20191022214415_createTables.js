@@ -88,6 +88,7 @@ exports.up = function(knex) {
         .onDelete('CASCADE');
       tbl.boolean('isClientOffer').notNullable();
       tbl.string('status').notNullable();
+      tbl.string('price').notNullable();
       tbl.timestamp('createdAt', { useTz: false });
       tbl.string('clientMessage');
     });
