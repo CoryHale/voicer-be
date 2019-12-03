@@ -87,6 +87,24 @@ router.get('/profile/:id', async (req, res) => {
   }
 });
 
+// Get talent profile by talent id
+router.get('/profile/tid/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const selectedTalentProfile = await TalentProfiles.getTalentProfileByTalentId(
+      id
+    );
+    if (selectedTalentProfile) {
+      res.status(200).json(selectedTalentProfile);
+    } else {
+      res.status(404).json({ message: 'Could not find talent profile.' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find talent profile.' });
+  }
+});
+
 // Add allowed languages
 router.post('/languages', async (req, res) => {
   try {
