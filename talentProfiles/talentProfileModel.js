@@ -51,7 +51,7 @@ const getTalentProfiles = _ => {
       'u.firstName',
       'u.lastName',
       'u.email'
-    )
+    );
 };
 
 const getTalentProfileById = async talentId => {
@@ -77,9 +77,10 @@ const getTalentProfileByUserId = async userId => {
         'usr.firstName',
         'usr.lastName',
         'talPro.talentId'
-      ).where({ "usr.userId": userId });
+      )
+      .where({ 'usr.userId': userId });
 
-    return (selectedProfile) ? selectedProfile : null;
+    return selectedProfile ? selectedProfile : null;
   } catch {
     return null;
   }
@@ -131,6 +132,15 @@ const getTalentLang = async () => {
   return await db('talentLanguages');
 };
 
+const getTalentLanguageByUserId = async userId => {
+  try {
+    const selectedProfile = await db('talentLanguages').where({ userId });
+    console.log(selectedProfile);
+    return selectedProfile;
+  } catch {
+    return null;
+  }
+};
 const addTalentLang = async talentLang => {
   return await db('talentLanguages').insert(talentLang);
   // .then(async () => {
@@ -180,5 +190,6 @@ module.exports = {
   deleteTalentLang,
   addTalentAccent,
   getTalentAccent,
-  deleteTalentAccent
+  deleteTalentAccent,
+  getTalentLanguageByUserId
 };

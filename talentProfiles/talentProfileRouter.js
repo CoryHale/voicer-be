@@ -186,6 +186,20 @@ router.get('/talentLanguage', async (req, res) => {
   }
 });
 
+//Get languages tied to specific user
+router.get('/talentLanguage/:id', async (req, res) => {
+  try {
+    const talentLanguages = await TalentProfiles.getTalentLanguageByUserId(
+      req.params.id
+    );
+    console.log(talentLanguages);
+
+    res.status(200).json(talentLanguages);
+  } catch (err) {
+    res.status(500).json({ mesage: 'Error retrieving talent languages by ID' });
+  }
+});
+
 //DELETE language added to user
 router.delete('/talentLanguage/:id', async (req, res) => {
   try {
