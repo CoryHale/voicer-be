@@ -3,7 +3,10 @@ exports.up = function(knex) {
     .createTable('users', tbl => {
       tbl.increments('userId');
       tbl.string('gender');
-      tbl.string('username').notNullable();
+      tbl
+        .string('username')
+        .notNullable()
+        .unique();
       tbl.string('password').notNullable();
       tbl.string('userType').notNullable();
       tbl
