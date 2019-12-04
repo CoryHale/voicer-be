@@ -3,7 +3,10 @@ exports.up = function(knex) {
     .createTable('users', tbl => {
       tbl.increments('userId');
       tbl.string('gender');
-      tbl.string('username').notNullable();
+      tbl
+        .string('username')
+        .notNullable()
+        .unique();
       tbl.string('password').notNullable();
       tbl.string('userType').notNullable();
       tbl
@@ -88,6 +91,7 @@ exports.up = function(knex) {
         .onDelete('CASCADE');
       tbl.boolean('isClientOffer').notNullable();
       tbl.string('status').notNullable();
+      tbl.string('price').notNullable();
       tbl.timestamp('createdAt', { useTz: false });
       tbl.string('clientMessage');
     });
