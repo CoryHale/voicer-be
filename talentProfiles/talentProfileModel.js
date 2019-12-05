@@ -147,6 +147,7 @@ const getTalentLanguageByUserId = async userId => {
     return null;
   }
 };
+
 const addTalentLang = async talentLang => {
   return await db('talentLanguages').insert(talentLang);
   // .then(async () => {
@@ -162,6 +163,17 @@ const deleteTalentLang = async talentLangId => {
 
 const getTalentAccent = async () => {
   return await db('talentAccents');
+};
+
+const getTalentAccentByUserId = async userId => {
+  try {
+    return await db('talentAccents as tAcc')
+      .join('accents as acc', 'tAcc.accentId', '=', 'acc.accentId')
+      .select('tAcc.userId', 'tAcc.talentAccentId', 'acc.accentId')
+      .where({ 'tAcc.userId': userId });
+  } catch {
+    return null;
+  }
 };
 
 const addTalentAccent = async talentAccent => {
@@ -197,5 +209,6 @@ module.exports = {
   addTalentAccent,
   getTalentAccent,
   deleteTalentAccent,
-  getTalentLanguageByUserId
+  getTalentLanguageByUserId,
+  getTalentAccentByUserId
 };
