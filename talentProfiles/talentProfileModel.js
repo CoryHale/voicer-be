@@ -134,9 +134,15 @@ const getTalentLang = async () => {
 
 const getTalentLanguageByUserId = async userId => {
   try {
-    const selectedProfile = await db('talentLanguages').where({ userId });
-    console.log(selectedProfile);
-    return selectedProfile;
+    return await db('talentLanguages as tLang')
+      .join('languages as lang', 'tLang.languageId', '=', 'lang.languageId')
+      .select(
+        'tLang.userId',
+        'tLang.talentLanguageId',
+        'lang.language',
+        'tLang.languageId'
+      )
+      .where({ 'tLang.userId': userId });
   } catch {
     return null;
   }
