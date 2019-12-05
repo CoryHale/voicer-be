@@ -225,7 +225,7 @@ router.get('/talentAccent', async (req, res) => {
 
 //Get accents tied to specific userId
 
-router.get('talentAccent/:id', async (req, res) => {
+router.get('/talentAccent/:id', async (req, res) => {
   try {
     const talentAccents = await TalentProfiles.getTalentAccentByUserId(
       req.params.id
