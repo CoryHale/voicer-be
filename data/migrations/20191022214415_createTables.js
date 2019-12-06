@@ -27,6 +27,9 @@ exports.up = function(knex) {
         .references('userId')
         .inTable('users')
         .onDelete('CASCADE');
+      tbl.string('voiceGender');
+      tbl.string('voiceAge');
+      tbl.string('biography');
       tbl.integer('rating');
     })
     .createTable('clientProfiles', tbl => {
