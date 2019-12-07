@@ -169,7 +169,12 @@ const getTalentAccentByUserId = async userId => {
   try {
     return await db('talentAccents as tAcc')
       .join('accents as acc', 'tAcc.accentId', '=', 'acc.accentId')
-      .select('tAcc.userId', 'tAcc.talentAccentId', 'acc.accentId')
+      .select(
+        'tAcc.userId',
+        'tAcc.talentAccentId',
+        'acc.accent',
+        'tAcc.accentId'
+      )
       .where({ 'tAcc.userId': userId });
   } catch {
     return null;
