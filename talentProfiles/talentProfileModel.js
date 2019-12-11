@@ -76,7 +76,10 @@ const getTalentProfileByUserId = async userId => {
         'usr.email',
         'usr.firstName',
         'usr.lastName',
-        'talPro.talentId'
+        'talPro.talentId',
+        'talPro.voiceGender',
+        'talPro.voiceAge',
+        'talPro.biography'
       ).where({ "usr.userId": userId });
 
     return (selectedProfile) ? selectedProfile : null;
