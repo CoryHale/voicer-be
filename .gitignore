@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-node_modules
-=======
 
 # Created by https://www.gitignore.io/api/node,macos
 # Edit at https://www.gitignore.io/?templates=node,macos
@@ -127,4 +124,3 @@ public/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node,macos
->>>>>>> 1f8b7636263da288480c77b0e3926743d7492ba0
