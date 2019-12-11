@@ -8,7 +8,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema.table('users', tbl => {
-        table.dropColumn('loyaltyLevel');
-        table.dropColumn('completedJobs');
+        tbl.dropColumn('loyaltyLevel');
+        tbl.dropColumn('completedJobs');
     });
 };
