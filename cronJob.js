@@ -4,7 +4,7 @@ const JobOffers = require('./jobOffers/jobOfferModel.js');
 const TalentProfiles = require('./talentProfileModel.js');
 const ClientProfiles = require('./clientProfileModel.js');
 
-export const schedule = () =>
+const schedule = () =>
 cron.schedule("1 * * * *", async function() {
         const users = await Users.getUsers()
         users.forEach(async user => {
@@ -45,3 +45,7 @@ cron.schedule("1 * * * *", async function() {
             console.log('Success!')
         })
 })
+
+module.exports = {
+    schedule
+}
