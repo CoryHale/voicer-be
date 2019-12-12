@@ -15,6 +15,8 @@ exports.up = function(knex) {
         .unique();
       tbl.string('firstName').notNullable();
       tbl.string('lastName').notNullable();
+      tbl.float('averageRating', 2, 1);
+      tbl.integer('ratingsReceived').defaultTo(0);
     })
     .createTable('talentProfiles', tbl => {
       tbl.increments('talentId');
@@ -97,12 +99,45 @@ exports.up = function(knex) {
       tbl.string('price').notNullable();
       tbl.timestamp('createdAt', { useTz: false });
       tbl.string('clientMessage');
+    })
+    .createTable('reviews', tbl => {
+      tbl.increments("reviewId");
+      tbl
+        .integer('authorId')
+        .unsigned()
+        .notNullable();
+      tbl
+        .foreign('authorId')
+        .references('userId')
+        .inTable('users')
+        .onDelete('CASCADE');
+      tbl
+        .integer('recipientId')
+        .unsigned()
+        .notNullable();
+      tbl
+        .foreign('recipientId')
+        .references('userId')
+        .inTable('users')
+        .onDelete('CASCADE');
+      tbl
+        .integer('jobId')
+        .unsigned()
+        .notNullable();
+      tbl
+        .foreign('jobId')
+        .references('jobId')
+        .inTable('jobs')
+        .onDelete('CASCADE');
+      tbl.float('rating', 2, 1).notNullable();
+      tbl.string('message');
     });
 };
 
 exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('jobOffers')
+    .dropTableIfExists('reviews')
     .dropTableIfExists('jobs')
     .dropTableIfExists('clientProfiles')
     .dropTableIfExists('talentProfiles')
