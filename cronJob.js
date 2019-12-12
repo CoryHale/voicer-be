@@ -1,8 +1,8 @@
 const cron = require('node-cron');
 const Users = require('./users/userModel.js');
 const JobOffers = require('./jobOffers/jobOfferModel.js');
-const TalentProfiles = require('./talentProfileModel.js');
-const ClientProfiles = require('./clientProfileModel.js');
+const TalentProfiles = require('./talentProfiles/talentProfileModel.js');
+const ClientProfiles = require('./clientProfiles/clientProfileModel.js');
 
 const schedule = () =>
 cron.schedule("1 * * * *", async function() {
