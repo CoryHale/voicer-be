@@ -32,11 +32,13 @@ cron.schedule("1 * * * *", async function() {
                 loyalty = 3
             }
             if (completedOffers.length !== user.completedJobs) {
-                Users.updateUser(user.userId, {
+                await Users.updateUser(user.userId, {
                     completedJobs: completedOffers.length,
                     loyaltyLevel: loyalty
                 })
+                console.log('Success!')
             }
+            console.log('Success!')
         })
 })
 
