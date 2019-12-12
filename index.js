@@ -1,5 +1,5 @@
 require('dotenv').config();
-const schedule = require('./cronJob.js');
+const { schedule } = require('./cronJob.js');
 
 const server = require('./server');
 
