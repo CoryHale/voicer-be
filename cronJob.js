@@ -5,7 +5,7 @@ const TalentProfiles = require('./talentProfileModel.js');
 const ClientProfiles = require('./clientProfileModel.js');
 
 const schedule = () =>
-cron.schedule("* 0 1 * *", async function() {
+cron.schedule("1 * * * *", async function() {
         const users = await Users.getUsers()
         users.forEach(user => {
             const profile = user.userType === "Talent"
