@@ -7,7 +7,7 @@ const ClientProfiles = require('./clientProfileModel.js');
 const schedule = () =>
 cron.schedule("1 * * * *", async function() {
         const users = await Users.getUsers()
-        users.forEach(user => {
+        users.forEach(async user => {
             const profile = user.userType === "Talent"
              ? TalentProfiles.getTalentProfileByUserId(user.userId) 
              : ClientProfiles.getClientProfileByUserId(user.userId)
@@ -31,13 +31,17 @@ cron.schedule("1 * * * *", async function() {
             if (completedOffers.length >= 25) {
                 loyalty = 3
             }
-            if (completedOffers.length !== user.completedJobs) {
+            if (completedOffers.length !== user.completedJobs.length) {
                 await Users.updateUser(user.userId, {
                     completedJobs: completedOffers.length,
                     loyaltyLevel: loyalty
                 })
                 console.log('Success!')
             }
+            await Users.updateUser(user.userId, {
+                completedJobs: completedOffers.length,
+                loyaltyLevel: loyalty
+            })
             console.log('Success!')
         })
 })
