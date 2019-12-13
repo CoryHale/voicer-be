@@ -17,7 +17,7 @@ const schedule = () => {
                 ? JobOffers.getJobOffersByTalentId(profile.talentId)
                 : JobOffers.getJobOffersByClientId(profile.clientId)
             var cutoffDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
-            cutoffDate.setMonth(d.getMonth() - 6);
+            cutoffDate.setMonth(cutoffDate.getMonth() - 6);
             testDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
             let completedOffers = offers.filter(offer => {
                 // let completedDate = new Date(offer.completedDate)
