@@ -9,12 +9,12 @@ const schedule = () => {
         const users = await Users.getUsers();
         users.forEach(async user => {
             const profile = user.userType === "Talent"
-                ? TalentProfiles.getTalentProfileByUserId(user.userId) 
-                : ClientProfiles.getClientProfileByUserId(user.userId)
+                ? await TalentProfiles.getTalentProfileByUserId(user.userId) 
+                : await ClientProfiles.getClientProfileByUserId(user.userId)
             console.log(profile)
             const offers = user.userType === "Talent"
-                ? JobOffers.getJobOffersByTalentId(profile.talentId)
-                : JobOffers.getJobOffersByClientId(profile.clientId)
+                ? await JobOffers.getJobOffersByTalentId(profile.talentId)
+                : await JobOffers.getJobOffersByClientId(profile.clientId)
             console.log(offers)
             var cutoffDate = new Date()
             //var cutoffDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
