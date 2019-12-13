@@ -23,7 +23,7 @@ server.use("/api/jobs", restricted, jobRouter);
 server.use("/api/jobs", restricted, jobOfferRouter);
 server.use("/api/clients", restricted, ClientProfileRouter);
 server.use("/api/talents", restricted, talentProfileRouter);
-server.use("/api/reviews", restricted, reviews);
+server.use("/api/reviews", restricted, reviewRouter);
 
 server.get("/", (req, res) => {
   res.send("<h1>Backend API for Voicer</h1>");
