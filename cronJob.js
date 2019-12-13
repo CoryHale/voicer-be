@@ -1,19 +1,21 @@
-const cron = require('node-cron');
+var cron = require('node-cron');
 const Users = require('./users/userModel.js');
 const JobOffers = require('./jobOffers/jobOfferModel.js');
 const TalentProfiles = require('./talentProfiles/talentProfileModel.js');
 const ClientProfiles = require('./clientProfiles/clientProfileModel.js');
 
-const schedule = () =>
-cron.schedule("1 * * * *", async function() {
-        const users = await Users.getUsers()
+const schedule = () => {
+    cron.schedule("0 * * * * *", async () => {
+        console.log("Schedule");
+        const users = await Users.getUsers();
+        console.log(users)
         users.forEach(async user => {
             const profile = user.userType === "Talent"
-             ? TalentProfiles.getTalentProfileByUserId(user.userId) 
-             : ClientProfiles.getClientProfileByUserId(user.userId)
+                ? TalentProfiles.getTalentProfileByUserId(user.userId) 
+                : ClientProfiles.getClientProfileByUserId(user.userId)
             let offers = user.userType === "Talent"
-             ? JobOffers.getJobOffersByTalentId(profile.talentId)
-             : JobOffers.getJobOffersByClientId(profile.clientId)
+                ? JobOffers.getJobOffersByTalentId(profile.talentId)
+                : JobOffers.getJobOffersByClientId(profile.clientId)
             var cutoffDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
             cutoffDate.setMonth(d.getMonth() - 6);
             testDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
@@ -36,16 +38,15 @@ cron.schedule("1 * * * *", async function() {
                     completedJobs: completedOffers.length,
                     loyaltyLevel: loyalty
                 })
-                console.log('Success!')
             }
             await Users.updateUser(user.userId, {
                 completedJobs: completedOffers.length,
                 loyaltyLevel: loyalty
             })
-            console.log('Success!')
-        })
-})
-
-module.exports = {
-    schedule
+            console.log("For Each User")
+        });
+    })
 }
+
+
+module.exports = schedule;
