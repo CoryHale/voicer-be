@@ -16,15 +16,13 @@ const schedule = () => {
             let offers = user.userType === "Talent"
                 ? JobOffers.getJobOffersByTalentId(profile.talentId)
                 : JobOffers.getJobOffersByClientId(profile.clientId)
-            var cutoffDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
+            var cutoffDate = new Date()
+            //var cutoffDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
             cutoffDate.setMonth(cutoffDate.getMonth() - 6);
-            testDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
+            //var testDate = new Date().toISOString().slice(0, 10).replace('T', ' ');
             let completedOffers = offers.filter(offer => {
                 // let completedDate = new Date(offer.completedDate)
-                if (offer.status.toLowerCase() === "Accepted"
-                && testDate >= cutoffDate) {
-                    return offer
-                }
+                ((offer.status.toLowerCase() === "accepted") && (offer.completedDate >= cutoffDate))
             })
             let loyalty = 1
             if (10 <= completedOffers.length <= 24) {
