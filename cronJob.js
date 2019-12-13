@@ -9,8 +9,8 @@ const schedule = () => {
         const users = await Users.getUsers();
         users.forEach(async user => {
             const profile = user.userType === "Talent"
-                ? await TalentProfiles.getTalentProfileByUserId(user.userId) 
-                : await ClientProfiles.getClientProfileByUserId(user.userId)
+                ? await TalentProfiles.getTalentProfileByUserId(user.userId)[0] 
+                : await ClientProfiles.getClientProfileByUserId(user.userId)[0]
             console.log(profile)
             const offers = user.userType === "Talent"
                 ? await JobOffers.getJobOffersByTalentId(profile.talentId)
