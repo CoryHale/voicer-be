@@ -59,21 +59,36 @@ router.get('/', async (req, res) => {
 });
 
 
-// Get voice sample by userId
+// Get voice sample by userId FIX THIS ONE
+// router.get('/:id', async (req, res) => {
+//     const { id } = req.params;
+
+//     try {
+//         const selectedVoiceSamples = await VoiceSamples.getVoiceSamplesByUserId(id);
+
+//         if (selectedVoiceSamples) {
+//             res.json(selectedVoiceSamples);
+//         } else {
+//             res.status(404).json({ message: 'Could not find voice samples.' });
+//         }
+//     } catch (err) {
+//         res.status(500).json({ message: 'Could not find voice sample', error: error });
+//     }
+// });
+
+// Get voice sample by Id
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const selectedVoiceSamples = await VoiceSamples.getVoiceSamplesByUserId(id);
+        const selectedVoiceSample = await VoiceSamples.getVoiceSampleById(id);
 
-        if (selectedVoiceSamples) {
-            res.json(selectedVoiceSamples);
+        if (selectedVoiceSample) {
+            res.json(selectedVoiceSample);
         } else {
-            res.status(404).json({ message: 'Could not find voice samples.' })
+            res.status(404).json({ message: 'Could not find voice sample.' });
         }
     } catch (err) {
-        
+        res.status(500).json({ message: 'Could not find voice sample', error: error });
     }
 });
-
-// Get voice samples by Id

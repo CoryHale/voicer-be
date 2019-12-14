@@ -51,11 +51,10 @@ const getVoiceSamples = () => {
         )
 };
 
-// FIX THIS ONE!
-const getVoiceSampleById = async userId => {
+const getVoiceSampleById = async sampleId => {
     try {
         const selectedSample = await db('talentVoiceSamples')
-            .where({ userId })
+            .where({ sampleId })
             .first();
         return selectedSample ? selectedSample : null;
     } catch {
@@ -63,7 +62,7 @@ const getVoiceSampleById = async userId => {
     }
 };
 
-const getVoiceSampleByUserId = async userId => {
+const getVoiceSamplesByUserId = async userId => {
     try {
         const selectedSamples = await db('users as u')
             .join('talentVoiceSamples as vs', 'u.userId', '=', 'vs.userId')
@@ -85,5 +84,5 @@ module.exports = {
     deleteVoiceSample,
     getVoiceSamples,
     getVoiceSampleById,
-    getVoiceSampleByUserId
+    getVoiceSamplesByUserId
 };
