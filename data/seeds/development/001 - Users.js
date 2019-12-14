@@ -12,7 +12,10 @@ exports.seed = function(knex) {
           email: 'TestClientOne@test.com',
           firstName: 'Client',
           lastName: 'One',
-          gender: 'Male'
+          gender: 'Male',
+          completedJobs: 2,
+          loyaltyLevel: 1,
+          accountBalance: 5500.50
         },
         {
           username: 'TestClientTwo',
@@ -21,7 +24,10 @@ exports.seed = function(knex) {
           email: 'TestClientTwo@test.com',
           firstName: 'Client',
           lastName: 'Two',
-          gender: 'Female'
+          gender: 'Female',
+          completedJobs: 1,
+          loyaltyLevel: 1,
+          accountBalance: 3500.50
         },
         {
           username: 'TestTalentOne',
@@ -30,7 +36,10 @@ exports.seed = function(knex) {
           email: 'TestTalentOne@test.com',
           firstName: 'Talent',
           lastName: 'One',
-          gender: 'Male'
+          gender: 'Male',
+          completedJobs: 2,
+          loyaltyLevel: 1,
+          accountBalance: 2500.50
         },
         {
           username: 'TestTalentTwo',
@@ -39,7 +48,10 @@ exports.seed = function(knex) {
           email: 'TestTalentTwo@test.com',
           firstName: 'Talent',
           lastName: 'Two',
-          gender: 'Binary'
+          gender: 'Binary',
+          completedJobs: 1,
+          loyaltyLevel: 1,
+          accountBalance: 1500.50
         }
       ]);
     });
