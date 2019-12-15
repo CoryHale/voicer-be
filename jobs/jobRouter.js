@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Jobs = require('./jobModel.js');
+const JobOffers = require('../jobOffers/jobOfferModel.js');
 
 // /api/jobs endpoint
 
@@ -82,5 +83,22 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Could not find job.' });
   }
 });
+
+// Complete a job, and change it's most recent job offer to completed
+router.put('/complete/:id', async (req, res) => {
+
+  const { id } = req.params;
+
+  try {
+    const offers = (await JobOffers.getJobOffersByJobId(id))
+      .filter(offer => offer.status.toLowerCase() !== 'open' || offer.status.toLowerCase !== 'declined')
+      .reverse()
+    await Jobs.updateJob(id, {status: "Completed"})
+    await JobOffers.updateJobOffer(offers[0].jobOfferId, {status: "Completed"})
+    res.status(200).json({message: 'Successfully completed job ' + id + ' and it\'s related offer'})
+  } catch(error) {
+    res.status(500).json({ message: 'Error occured while completing job - ' + error.message})
+  }
+})
 
 module.exports = router;

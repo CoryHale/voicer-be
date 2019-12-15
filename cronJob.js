@@ -4,7 +4,7 @@ const JobOffers = require('./jobOffers/jobOfferModel.js');
 const TalentProfiles = require('./talentProfiles/talentProfileModel.js');
 const ClientProfiles = require('./clientProfiles/clientProfileModel.js');
 
-const schedule = () => {
+const schedule = (schedule) => {
     console.log('hi')
     return cron.schedule("0 0 1 1-12 *", async () => {
         const users = await Users.getUsers();
@@ -19,7 +19,7 @@ const schedule = () => {
             var cutoffDate = new Date()
             cutoffDate.setMonth(cutoffDate.getMonth() - 6);
             let completedOffers = offers.filter(offer => {
-                return (offer.status.toLowerCase() === "accepted") ?
+                return (offer.status.toLowerCase() === "completed") ?
                     new Date(offer.completedDate) > cutoffDate ? offer : false : false
             })
             let loyalty = 1
