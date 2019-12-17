@@ -6,7 +6,8 @@ const ClientProfiles = require('./clientProfiles/clientProfileModel.js');
 
 const schedule = (schedule) => {
     console.log('hi')
-    return cron.schedule("0 0 1 1-12 *", async () => {
+    // return cron.schedule("0 0 1 1-12 *", async () => {
+    return cron.schedule("0 * * * * *", async () => {
         const users = await Users.getUsers();
         users.forEach(async user => {
             console.log(user.userType)
