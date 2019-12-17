@@ -5,7 +5,7 @@ const Reviews = require("./reviewModel.js");
 const Users = require("../users/userModel");
 
 // Add review
-router.post("/review", async (req, res) => {
+router.post("/", async (req, res) => {
     const reviewData = req.body;
     const recipientId = reviewData.recipientId;
 
@@ -32,7 +32,7 @@ router.post("/review", async (req, res) => {
 });
 
 // Update review
-router.put("/review/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     const reviewData = req.body;
     const { id } = req.params;
 
@@ -59,7 +59,7 @@ router.put("/review/:id", async (req, res) => {
 });
 
 // Delete review
-router.delete("/review/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -100,7 +100,7 @@ router.delete("/review/:id", async (req, res) => {
 });
 
 // Get review by id
-router.get("/review/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
