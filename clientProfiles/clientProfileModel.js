@@ -59,7 +59,7 @@ const getClientProfileById = async (clientId) => {
         'usr.loyaltyLevel', 
         'cliPro.clientId', 
         'cliPro.companyName')
-      .where({ "cliPro.clientId": clientId }).first();
+      .where({ clientId });
       return (selectedProfile) ? selectedProfile : null;
   }
   catch {

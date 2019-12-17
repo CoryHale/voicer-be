@@ -84,6 +84,7 @@ router.get('/:id', async (req, res) => {
 
 // Get client profile by clientId
 router.get('/cid/:id', async (req, res) => {
+  
   const { id } = req.params;
 
   try {
