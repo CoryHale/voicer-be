@@ -45,8 +45,8 @@ const getClientProfiles = _ => {
 
 const getClientProfileById = async (clientId) => {
   try{
-      const selectedProfile = await db('clientProfiles')
-      .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
+      const selectedProfile = await db('clientProfiles as cliPro')
+      .join('users as usr', 'usr.userId', '=', 'cliPro.userId')
       .select(
         'usr.userId',
         'usr.username', 
@@ -59,7 +59,7 @@ const getClientProfileById = async (clientId) => {
         'usr.loyaltyLevel', 
         'cliPro.clientId', 
         'cliPro.companyName')
-      .where({ clientId }).first();
+      .where({ "cliPro.clientId": clientId }).first();
       return (selectedProfile) ? selectedProfile : null;
   }
   catch {

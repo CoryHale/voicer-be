@@ -56,8 +56,8 @@ const getTalentProfiles = _ => {
 
 const getTalentProfileById = async talentId => {
   try {
-    const selectedProfile = await db('talentProfiles')
-      .join('talentProfiles as talPro', 'usr.userId', '=', 'talPro.userId')
+    const selectedProfile = await db('talentProfiles as talPro')
+      .join('users as usr', 'usr.userId', '=', 'talPro.userId')
       .select(
         'usr.userId',
         'usr.username',
@@ -72,7 +72,7 @@ const getTalentProfileById = async talentId => {
         'talPro.voiceGender',
         'talPro.voiceAge',
         'talPro.biography')
-      .where({ talentId })
+      .where({ "talPro.talentId": talentId })
       .first()
     return selectedProfile ? selectedProfile : null;
   } catch {
