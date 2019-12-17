@@ -26,7 +26,7 @@ server.use('/api/jobs', restricted, jobRouter);
 server.use('/api/jobs', restricted, jobOfferRouter);
 server.use('/api/clients', restricted, ClientProfileRouter);
 server.use('/api/talents', restricted, talentProfileRouter);
-server.use('/uploads', sign_s3.sign_s3);
+server.use('/api/uploads', sign_s3.sign_s3);
 
 server.get('/', (req, res) => {
   res.send('<h1>Backend API for Voicer</h1>');
