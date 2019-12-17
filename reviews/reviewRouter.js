@@ -115,3 +115,5 @@ router.get("/review/:id", async (req, res) => {
         res.status(500).json({ message: "Could not find review." });
     }
 });
+
+module.exports = router;
