@@ -45,7 +45,21 @@ const getClientProfiles = _ => {
 
 const getClientProfileById = async (clientId) => {
   try{
-      const selectedProfile = await db('clientProfiles').where({ clientId }).first();
+      const selectedProfile = await db('clientProfiles')
+      .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
+      .select(
+        'usr.userId',
+        'usr.username', 
+        'usr.userType', 
+        'usr.email',
+        'usr.firstName', 
+        'usr.lastName', 
+        'usr.completedJobs', 
+        'usr.accountBalance',
+        'usr.loyaltyLevel', 
+        'cliPro.clientId', 
+        'cliPro.companyName')
+      .where({ clientId }).first();
       return (selectedProfile) ? selectedProfile : null;
   }
   catch {
@@ -58,7 +72,18 @@ const getClientProfileByUserId = async (userId) => {
         const selectedProfile = await
         db('users as usr')
         .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
-        .select('usr.userId', 'usr.username', 'usr.userType', 'usr.email', 'usr.firstName', 'usr.lastName', 'cliPro.clientId', 'cliPro.companyName')
+        .select(
+         'usr.userId',
+         'usr.username', 
+         'usr.userType', 
+         'usr.email',
+         'usr.firstName', 
+         'usr.lastName', 
+         'usr.completedJobs', 
+         'usr.accountBalance',
+         'usr.loyaltyLevel', 
+         'cliPro.clientId', 
+         'cliPro.companyName')
         .where({ "usr.userId": userId })
         return (selectedProfile) ? selectedProfile : null;
     }

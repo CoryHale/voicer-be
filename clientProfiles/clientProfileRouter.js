@@ -82,6 +82,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Get client profile by clientId
+router.get('/cid/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const selectedClientProfile = await ClientProfiles.getClientProfileById(id);
+
+    if (selectedClientProfile) {
+      res.json(selectedClientProfile);
+    } else {
+      res.status(404).json({ message: 'Could not find client profile.' })
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Could not find client profile.' });
+  }
+});
+
 //Get jobs by clientId
 router.get('/:clientId/jobs', async (req, res) => {
   const {clientId} = req.params

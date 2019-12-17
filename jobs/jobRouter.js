@@ -3,6 +3,9 @@ const router = express.Router();
 
 const Jobs = require('./jobModel.js');
 const JobOffers = require('../jobOffers/jobOfferModel.js');
+const Users = require('../users/userModel.js');
+const TalentProfiles = require('../talentProfiles/talentProfileModel.js');
+const ClientProfiles = require('../clientProfiles/clientProfileModel.js');
 
 // /api/jobs endpoint
 
@@ -95,6 +98,15 @@ router.put('/complete/:id', async (req, res) => {
       .reverse()
     await Jobs.updateJob(id, {status: "Completed"})
     await JobOffers.updateJobOffer(offers[0].jobOfferId, {status: "Completed"})
+    const client = ClientProfile.getClientProfileById(offers[0].clientId)
+    const talent = TalentProfile.getTalentProfileById(offers[0].talentId)
+    await Users.updateUser(client[0].userId, {
+      completedJobs: client[0].completedJobs+1
+    })
+    await Users.updateUser(talent[0].userId, {
+      completedJobs: talent[0].completedJobs+1,
+      accountBalance: talent[0].accountBalance + offers[0].price
+    })
     res.status(200).json({message: 'Successfully completed job ' + id + ' and it\'s related offer'})
   } catch(error) {
     res.status(500).json({ message: 'Error occured while completing job - ' + error.message})
