@@ -100,11 +100,25 @@ router.put('/complete/:id', async (req, res) => {
     await JobOffers.updateJobOffer(offers[0].jobOfferId, {status: "Completed"})
     const client = ClientProfile.getClientProfileById(offers[0].clientId)
     const talent = TalentProfile.getTalentProfileById(offers[0].talentId)
+    let clientLoyalty = client[0].loyaltyLevel
+    let talentLoyalty = talent[0].loyaltyLevel
+    if(10 <= client[0].completedJobs+1 <= 24) {
+      clientLoyalty = 2
+    } else if(client[0].completedJobs+1 >= 25) {
+      clientLoyalty = 3
+    }
+    if(10 <= talent[0].completedJobs+1 <= 24) {
+      talentLoyalty = 2
+    } else if(talent[0].completedJobs+1 >= 25) {
+      talentLoyalty = 3
+    }
     await Users.updateUser(client[0].userId, {
-      completedJobs: client[0].completedJobs+1
+      completedJobs: client[0].completedJobs+1,
+      loyaltyLevel: clientLoyalty
     })
     await Users.updateUser(talent[0].userId, {
       completedJobs: talent[0].completedJobs+1,
+      loyaltyLevel: talentLoyalty,
       accountBalance: talent[0].accountBalance + offers[0].price
     })
     res.status(200).json({message: 'Successfully completed job ' + id + ' and it\'s related offer'})
