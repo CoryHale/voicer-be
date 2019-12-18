@@ -32,6 +32,20 @@ exports.up = function(knex) {
       tbl.string('biography');
       tbl.integer('rating');
     })
+    .createTable('talentVoiceSamples', tbl => {
+      tbl.increments('sampleId');
+      tbl
+        .integer('userId')
+        .unsigned()
+        .notNullable();
+      tbl
+        .foreign('userId')
+        .references('userId')
+        .inTable('users')
+        .onDelete('CASCADE');
+      tbl.string('url');
+      tbl.string('description');
+    })
     .createTable('clientProfiles', tbl => {
       tbl.increments('clientId');
       tbl
@@ -105,6 +119,7 @@ exports.down = function(knex) {
     .dropTableIfExists('jobOffers')
     .dropTableIfExists('jobs')
     .dropTableIfExists('clientProfiles')
+    .dropTableIfExists('talentVoiceSamples')
     .dropTableIfExists('talentProfiles')
     .dropTableIfExists('users');
 };
