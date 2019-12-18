@@ -15,7 +15,7 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
-server.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+server.use(cors());
 
 server.use('/api/users', restricted, userRouter);
 server.use('/api/auth', authRouter);
@@ -26,7 +26,7 @@ server.use('/api/talents', restricted, talentProfileRouter);
 server.use('/api/uploads', restricted, sign_s3.sign_s3);
 
 server.get('/', (req, res) => {
-  res.send('<h1>Backend API for Voicer</h1>');
+    res.send('<h1>Backend API for Voicer</h1>');
 });
 
 module.exports = server;
