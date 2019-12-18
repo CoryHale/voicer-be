@@ -72,8 +72,7 @@ const getTalentProfileById = async talentId => {
         'talPro.voiceGender',
         'talPro.voiceAge',
         'talPro.biography')
-      .where({ "talPro.talentId": talentId })
-      .first()
+      .where({ talentId })
     return selectedProfile ? selectedProfile : null;
   } catch {
     return null;
