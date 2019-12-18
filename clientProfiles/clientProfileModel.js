@@ -73,17 +73,17 @@ const getClientProfileByUserId = async (userId) => {
         db('users as usr')
         .join('clientProfiles as cliPro', 'usr.userId', '=', 'cliPro.userId')
         .select(
-         'usr.userId',
-         'usr.username', 
-         'usr.userType', 
-         'usr.email',
-         'usr.firstName', 
-         'usr.lastName', 
-         'usr.completedJobs', 
-         'usr.accountBalance',
-         'usr.loyaltyLevel', 
-         'cliPro.clientId', 
-         'cliPro.companyName')
+          'usr.userId',
+          'usr.username', 
+          'usr.userType', 
+          'usr.email',
+          'usr.firstName', 
+          'usr.lastName', 
+          'usr.completedJobs', 
+          'usr.accountBalance',
+          'usr.loyaltyLevel', 
+          'cliPro.clientId', 
+          'cliPro.companyName')
         .where({ "usr.userId": userId })
         return (selectedProfile) ? selectedProfile : null;
     }
