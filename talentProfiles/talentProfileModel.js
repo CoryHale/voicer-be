@@ -56,9 +56,23 @@ const getTalentProfiles = _ => {
 
 const getTalentProfileById = async talentId => {
   try {
-    const selectedProfile = await db('talentProfiles')
+    const selectedProfile = await db('talentProfiles as talPro')
+      .join('users as usr', 'usr.userId', '=', 'talPro.userId')
+      .select(
+        'usr.userId',
+        'usr.username',
+        'usr.userType',
+        'usr.email',
+        'usr.firstName',
+        'usr.lastName',
+        'usr.completedJobs',
+        'usr.accountBalance',
+        'usr.loyaltyLevel',
+        'talPro.talentId',
+        'talPro.voiceGender',
+        'talPro.voiceAge',
+        'talPro.biography')
       .where({ talentId })
-      .first();
     return selectedProfile ? selectedProfile : null;
   } catch {
     return null;
@@ -76,6 +90,9 @@ const getTalentProfileByUserId = async userId => {
         'usr.email',
         'usr.firstName',
         'usr.lastName',
+        'usr.completedJobs',
+        'usr.accountBalance',
+        'usr.loyaltyLevel',
         'talPro.talentId',
         'talPro.voiceGender',
         'talPro.voiceAge',

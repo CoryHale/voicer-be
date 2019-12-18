@@ -74,7 +74,6 @@ const getJobOffersByClientId = async (clientId) => {
 }
 
 const getJobOffersByTalentId = async (talentId) => {
-    console.log('hi')
     try{
         const offers = await db('jobOffers').where({ talentId })
         return offers

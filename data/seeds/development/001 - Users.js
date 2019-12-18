@@ -1,4 +1,6 @@
 
+const bcrypt = require('bcryptjs');
+
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('users').del()
@@ -7,39 +9,51 @@ exports.seed = function(knex) {
       return knex('users').insert([
         {
           username: 'TestClientOne',
-          password: 'testclient1',
+          password: bcrypt.hashSync('testclient1',10),
           userType: 'client',
           email: 'TestClientOne@test.com',
           firstName: 'Client',
           lastName: 'One',
-          gender: 'Male'
+          gender: 'Male',
+          completedJobs: 2,
+          loyaltyLevel: 1,
+          accountBalance: 5500.50
         },
         {
           username: 'TestClientTwo',
-          password: 'testclient2',
+          password: bcrypt.hashSync('testclient2',10),
           userType: 'client',
           email: 'TestClientTwo@test.com',
           firstName: 'Client',
           lastName: 'Two',
-          gender: 'Female'
+          gender: 'Female',
+          completedJobs: 1,
+          loyaltyLevel: 1,
+          accountBalance: 3500.50
         },
         {
           username: 'TestTalentOne',
-          password: 'testtalent1',
+          password: bcrypt.hashSync('testtalent1',10),
           userType: 'talent',
           email: 'TestTalentOne@test.com',
           firstName: 'Talent',
           lastName: 'One',
-          gender: 'Male'
+          gender: 'Male',
+          completedJobs: 2,
+          loyaltyLevel: 1,
+          accountBalance: 2500.50
         },
         {
           username: 'TestTalentTwo',
-          password: 'testtalent2',
+          password: bcrypt.hashSync('testtalent2',10),
           userType: 'talent',
           email: 'TestTalentTwo@test.com',
           firstName: 'Talent',
           lastName: 'Two',
-          gender: 'Binary'
+          gender: 'Binary',
+          completedJobs: 1,
+          loyaltyLevel: 1,
+          accountBalance: 1500.50
         }
       ]);
     });

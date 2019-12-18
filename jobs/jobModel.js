@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig.js');
 
 const addJob = async (job) => {
-    let createdDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let createdDate = new Date();
     job['createdDate'] = createdDate;
     job['status'] = 'Hiring'
     return await db('jobs').insert(job)
