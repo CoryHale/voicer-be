@@ -28,7 +28,7 @@ exports.sign_s3 = (req, res) => {
     }
     const returnData = {
       signedRequest: data,
-      url: `hrrps://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
     };
     res.json({ success: true, data: { returnData } });
   });
