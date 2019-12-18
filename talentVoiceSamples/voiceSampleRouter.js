@@ -92,3 +92,5 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Could not find voice sample', error: error });
     }
 });
+
+module.exports = router;
