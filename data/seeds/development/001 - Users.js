@@ -54,6 +54,18 @@ exports.seed = function(knex) {
           completedJobs: 1,
           loyaltyLevel: 1,
           accountBalance: 1500.50
+        },
+        {
+          username: 'administrator',
+          password: bcrypt.hashSync('voicerapp',10),
+          userType: 'talent',
+          email: 'admin@example.com',
+          firstName: 'Admin',
+          lastName: 'Account',
+          gender: 'Binary',
+          completedJobs: 0,
+          loyaltyLevel: 1,
+          accountBalance: 0.00
         }
       ]);
     });
