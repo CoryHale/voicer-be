@@ -17,6 +17,7 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
+// server.use(cors({ origin: 'https://voicer-app.com', credentials: true }));
 server.use(cors());
 
 

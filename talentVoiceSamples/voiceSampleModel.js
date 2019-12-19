@@ -1,7 +1,11 @@
 const db = require('../data/dbConfig.js');
 
 const addVoiceSample = async sample => {
+  try {
     return await db('talentVoiceSamples').insert(sample);
+  } catch (err) {
+    return err.message;
+  }
 };
 
 const updateVoiceSample = async (userId, newSample) => {
