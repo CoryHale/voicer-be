@@ -112,7 +112,37 @@ router.get("/:id", async (req, res) => {
             res.status(404).json({ message: "Could not find review." });
         }
     } catch (err) {
-        res.status(500).json({ message: "Could not find review." });
+        res.status(500).json({ error: "Could not find review." });
+    }
+});
+
+router.get("/received/:recipientId", async (req, res) => {
+    const { recipientId } = req.params;
+    try {
+        let recipient = Users.getUserById(recipientId);
+        if (recipient) {
+            let receivedReviews = await Reviews.getReviewsByRecipientId(recipientId);
+            res.status(200).json(receivedReviews);
+        } else {
+            res.status(404).json({ message: "Could not find user."});
+        }
+    } catch {
+        res.status(500).json({ error: "There was a problem retrieving the reviews from the database." });
+    }
+});
+
+router.get("/authored/:authorId", async (req, res) => {
+    const { authorId } = req.params;
+    try {
+        let author = Users.getUserById(authorId);
+        if (author) {
+            let reviews = Reviews.getReviewsByAuthorId(authorId);
+            res.status(200).json(reviews);
+        } else {
+            res.status(404).json({ message: "Could not find user." });
+        }
+    } catch {
+        res.status(500).json({ error: "There was a problem retrieving the reviews from the database." });
     }
 });
 
