@@ -50,7 +50,9 @@ const getTalentProfiles = _ => {
       'u.username',
       'u.firstName',
       'u.lastName',
-      'u.email'
+      'u.email',
+      'u.loyaltyLevel',
+      'u.gender'
     )
 };
 
