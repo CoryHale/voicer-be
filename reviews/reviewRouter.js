@@ -116,6 +116,21 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.get("/all/:userId", async (req, res) => {
+    const { userId } = req.params;
+    try {
+        let author = Users.getUserById(userId);
+        if (author) {
+            let reviews = Reviews.getReviewsByUserId(userId);
+            res.status(200).json(reviews);
+        } else {
+            res.status(404).json({ message: "Could not find user." });
+        }
+    } catch {
+        res.status(500).json({ error: "There was a problem retrieving the reviews from the database." });
+    }
+});
+
 router.get("/received/:recipientId", async (req, res) => {
     const { recipientId } = req.params;
     try {

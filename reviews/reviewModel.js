@@ -53,6 +53,16 @@ const getReviewById = async (reviewId) => {
   }
 }
 
+const getReviewsByUserId = async (userId) => {
+    try {
+        const authoredReviews = await db('reviews').where({ authorId: userId });
+        const receivedReviews = await db('reviews').where({ recipientId: userId });
+        return authoredReviews.concat(receivedReviews);
+    } catch {
+        return null;
+    }
+}
+
 const getReviewsByAuthorId = async (authorId) => {
     try{
         const reviews = await db('reviews').where({ authorId });
@@ -89,6 +99,7 @@ module.exports = {
     deleteReview,
     getReviews,
     getReviewById,
+    getReviewsByUserId,
     getReviewsByAuthorId,
     getReviewsByRecipientId,
     getReviewsByJobId
