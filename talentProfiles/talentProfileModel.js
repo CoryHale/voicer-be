@@ -125,6 +125,15 @@ const getTalentProfileByTalentId = async talentId => {
   }
 };
 
+const getSamplesByTalentId = async talentId => {
+  try {
+    const samples = await db('talentVoiceSamples as s').where({"s.userId": talentId});
+    return samples;
+  } catch {
+    return null;
+  }
+}
+
 const getLanguages = () => {
   return db('languages');
 };
