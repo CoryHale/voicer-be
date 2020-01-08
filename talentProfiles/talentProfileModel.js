@@ -230,5 +230,6 @@ module.exports = {
   deleteTalentLang,
   addTalentAccent,
   getTalentAccent,
-  deleteTalentAccent
+  deleteTalentAccent,
+  getSamplesByTalentId
 };
