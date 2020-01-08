@@ -47,18 +47,12 @@ const genToken = user => {
     userType: user.userType
   };
 
-  console.log(payload);
-
   const secret = process.env.JWT_SECRET;
-
-  console.log(secret);
 
   const options = {
     expiresIn: '1h'
   };
-
-  console.log(options);
-
+  
   return jwt.sign(payload, secret, options);
 };
 

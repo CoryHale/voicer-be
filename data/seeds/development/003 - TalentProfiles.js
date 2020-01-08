@@ -6,7 +6,8 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('talentProfiles').insert([
         {userId: 3, rating: 3},
-        {userId: 4, rating: 3}
+        {userId: 4, rating: 3},
+        {userId: 5, rating: 3}
       ]);
     });
 };
