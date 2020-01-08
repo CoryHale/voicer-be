@@ -110,7 +110,7 @@ const getReviewsByAuthorId = async (authorId) => {
         return reviews;
     }
     catch {
-        return { test: 'test' };
+        return null;
     }
 }
 
