@@ -186,8 +186,15 @@ const deleteTalentAccent = async talentAccentId => {
 
 const getTalentLanguagesByUserId = async userId => {
   try {
-    const talentLanguages = await db('talentLanguages').where({ userId });
-    return talentLanguages;
+    return await db('talentLanguages as tLang')
+      .join('languages as lang', 'tLang.languageId', '=', 'lang.languageId')
+      .select(
+        'tLang.userId',
+        'tLang.talentLanguageId',
+        'lang.language',
+        'tLang.languageId'
+      )
+      .where({ 'tLang.userId': userId });
   } catch {
     return null;
   }
@@ -195,8 +202,15 @@ const getTalentLanguagesByUserId = async userId => {
 
 const getTalentAccentsByUserId = async userId => {
   try {
-    const talentAccents = await db('talentAccents').where({ userId });
-    return talentAccents;
+    return await db('talentAccents as tAcc')
+      .join('accents as acc', 'tAcc.accentId', '=', 'acc.accentId')
+      .select(
+        'tAcc.userId',
+        'tAcc.talentAccentId',
+        'acc.accent',
+        'tAcc.accentId'
+      )
+      .where({ 'tAcc.userId': userId });
   } catch {
     return null;
   }
