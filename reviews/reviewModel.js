@@ -45,7 +45,18 @@ const getReviews = () => {
 
 const getReviewById = async (reviewId) => {
   try{
-      const review = await db('reviews').where({ reviewId }).first();
+      const review = await db('reviews')
+        .where({ reviewId })
+        .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+        .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+        .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+        .select('reviews.reviewId',
+            'authors.username as authorUsername',
+            'recipients.username as recipientUsername',
+            'jobs.jobTitle',
+            'reviews.rating',
+            'reviews.message')
+        .first();
       return review;
   }
   catch {
@@ -55,8 +66,28 @@ const getReviewById = async (reviewId) => {
 
 const getReviewsByUserId = async (userId) => {
     try {
-        const authoredReviews = await db('reviews').where({ authorId: userId });
-        const receivedReviews = await db('reviews').where({ recipientId: userId });
+        const authoredReviews = await db('reviews')
+            .where({ authorId: userId })
+            .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+            .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+            .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+            .select('reviews.reviewId',
+                'authors.username as authorUsername',
+                'recipients.username as recipientUsername',
+                'jobs.jobTitle',
+                'reviews.rating',
+                'reviews.message');
+        const receivedReviews = await db('reviews')
+            .where({ recipientId: userId })
+            .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+            .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+            .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+            .select('reviews.reviewId',
+                'authors.username as authorUsername',
+                'recipients.username as recipientUsername',
+                'jobs.jobTitle',
+                'reviews.rating',
+                'reviews.message');
         return authoredReviews.concat(receivedReviews);
     } catch {
         return null;
@@ -65,7 +96,17 @@ const getReviewsByUserId = async (userId) => {
 
 const getReviewsByAuthorId = async (authorId) => {
     try{
-        const reviews = await db('reviews').where({ authorId });
+        const reviews = await db('reviews')
+            .where({ authorId })
+            .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+            .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+            .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+            .select('reviews.reviewId',
+                'authors.username as authorUsername',
+                'recipients.username as recipientUsername',
+                'jobs.jobTitle',
+                'reviews.rating',
+                'reviews.message');
         return reviews;
     }
     catch {
@@ -75,7 +116,17 @@ const getReviewsByAuthorId = async (authorId) => {
 
 const getReviewsByRecipientId = async (recipientId) => {
     try{
-        const reviews = await db('reviews').where({ recipientId })
+        const reviews = await db('reviews')
+            .where({ recipientId })
+            .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+            .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+            .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+            .select('reviews.reviewId',
+                'authors.username as authorUsername',
+                'recipients.username as recipientUsername',
+                'jobs.jobTitle',
+                'reviews.rating',
+                'reviews.message');
         return reviews;
     }
     catch {
@@ -85,7 +136,17 @@ const getReviewsByRecipientId = async (recipientId) => {
 
 const getReviewsByJobId = async (jobId) => {
     try{
-        const reviews = await db('reviews').where({ jobId })
+        const reviews = await db('reviews')
+            .where({ jobId })
+            .join('users as authors', 'authors.userId', '=', 'reviews.authorId')
+            .join('users as recipients', 'recipients.userId', '=', 'reviews.recipientId')
+            .join('jobs', 'jobs.jobId', '=', 'reviews.jobId')
+            .select('reviews.reviewId',
+                'authors.username as authorUsername',
+                'recipients.username as recipientUsername',
+                'jobs.jobTitle',
+                'reviews.rating',
+                'reviews.message');
         return reviews;
     }
     catch {
