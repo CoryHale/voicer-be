@@ -6,10 +6,30 @@ const Users = require("../users/userModel");
 
 // Add review
 router.post("/", async (req, res) => {
+
     const reviewData = req.body;
     const recipientId = reviewData.recipientId;
-
+    
     try {
+        const user = await Users.getUserById(reviewData.authorId);
+        // Check if user exists, if so...
+        if( user ) {
+            // Pull all reviews from that specific user
+            const reviews = await Reviews.getReviewsByUserId(reviewData.authorId);
+            // Check if the review has already been left
+            reviews.forEach(review => {
+                if (review.jobId === reviewData.jobId) {
+                    res.status(409).json({
+                        message: "You have already reviewed this person",
+                        error: error
+                    })
+                }
+            })
+        }
+        else {
+            res.status(404).json({ message: "Could not find user." });
+        }
+
         await Reviews.addReview(reviewData);
         let recipient = await Users.getUserById(recipientId);
         let newRatingsReceived = recipient.ratingsReceived + 1;
