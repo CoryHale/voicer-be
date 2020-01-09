@@ -51,7 +51,7 @@ const getTalentProfiles = _ => {
       'u.firstName',
       'u.lastName',
       'u.email'
-    )
+    );
 };
 
 const getTalentProfileById = async talentId => {
@@ -71,8 +71,9 @@ const getTalentProfileById = async talentId => {
         'talPro.talentId',
         'talPro.voiceGender',
         'talPro.voiceAge',
-        'talPro.biography')
-      .where({ talentId })
+        'talPro.biography'
+      )
+      .where({ talentId });
     return selectedProfile ? selectedProfile : null;
   } catch {
     return null;
@@ -97,9 +98,10 @@ const getTalentProfileByUserId = async userId => {
         'talPro.voiceGender',
         'talPro.voiceAge',
         'talPro.biography'
-      ).where({ "usr.userId": userId });
+      )
+      .where({ 'usr.userId': userId });
 
-    return (selectedProfile) ? selectedProfile : null;
+    return selectedProfile ? selectedProfile : null;
   } catch {
     return null;
   }
@@ -148,7 +150,7 @@ const deleteAccent = async accentId => {
 };
 
 const getTalentLang = async () => {
-  return await db('talentLanguages');
+  return db('talentLanguages');
 };
 
 const addTalentLang = async talentLang => {
@@ -175,10 +177,29 @@ const addTalentAccent = async talentAccent => {
       return await db('talentAccents');
     });
 };
+
 const deleteTalentAccent = async talentAccentId => {
   return await db('talentAccents')
     .where({ talentAccentId: talentAccentId })
     .del();
+};
+
+const getTalentLanguagesByUserId = async userId => {
+  try {
+    const talentLanguages = await db('talentLanguages').where({ userId });
+    return talentLanguages;
+  } catch {
+    return null;
+  }
+};
+
+const getTalentAccentsByUserId = async userId => {
+  try {
+    const talentAccents = await db('talentAccents').where({ userId });
+    return talentAccents;
+  } catch {
+    return null;
+  }
 };
 
 module.exports = {
@@ -200,5 +221,7 @@ module.exports = {
   deleteTalentLang,
   addTalentAccent,
   getTalentAccent,
-  deleteTalentAccent
+  deleteTalentAccent,
+  getTalentLanguagesByUserId,
+  getTalentAccentsByUserId
 };

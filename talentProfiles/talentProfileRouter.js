@@ -91,9 +91,7 @@ router.get('/profile/tid/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const selectedTalentProfile = await TalentProfiles.getTalentProfileById(
-      id
-    );
+    const selectedTalentProfile = await TalentProfiles.getTalentProfileById(id);
     if (selectedTalentProfile) {
       res.status(200).json(selectedTalentProfile);
     } else {
@@ -196,8 +194,8 @@ router.post('/talentLanguage', async (req, res) => {
 
 router.get('/talentLanguage', async (req, res) => {
   try {
-    const talentLanguage = await TalentProfiles.getTalentLang();
-    res.status(200).json(talentLanguage);
+    const tLang = await TalentProfiles.getTalentLang();
+    res.status(200).json(tLang);
   } catch (err) {
     res.status(500).json({ message: 'Error retrieving talent languages' });
   }
@@ -246,6 +244,32 @@ router.delete('/talentAccent/:id', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Error deleting Accent from User' });
+  }
+});
+
+//GET languages assigned to user by Id
+router.get('/talentLanguage/:id', async (req, res) => {
+  try {
+    const talentLang = await TalentProfiles.getTalentLanguagesByUserId(
+      req.params.id
+    );
+    res.status(200).json(talentLang);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving user languages', err });
+  }
+});
+
+//GET accents assigned to user by Id
+router.get('/talentAccent/:id', async (req, res) => {
+  try {
+    const talentAccents = await TalentProfiles.getTalentAccentsByUserId(
+      req.params.id
+    );
+    res.status(200).json(talentAccents);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: 'Error retrieving user accents by Id', err });
   }
 });
 
