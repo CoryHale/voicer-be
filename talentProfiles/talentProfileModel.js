@@ -107,6 +107,35 @@ const getTalentProfileByUserId = async userId => {
   }
 };
 
+const getTalentProfileByTalentId = async talentId => {
+  try {
+    const selectedProfile = await db('users as usr')
+      .join('talentProfiles as talPro', 'usr.userId', '=', 'talPro.userId')
+      .select(
+        'usr.userId',
+        'usr.username',
+        'usr.userType',
+        'usr.email',
+        'usr.firstName',
+        'usr.lastName',
+        'talPro.talentId'
+      ).where({ "talPro.talentId": talentId });
+
+    return (selectedProfile) ? selectedProfile : null;
+  } catch {
+    return null;
+  }
+};
+
+const getSamplesByTalentId = async talentId => {
+  try {
+    const samples = await db('talentVoiceSamples as s').where({"s.userId": talentId});
+    return samples;
+  } catch {
+    return null;
+  }
+}
+
 const getLanguages = () => {
   return db('languages');
 };
@@ -202,5 +231,6 @@ module.exports = {
   deleteTalentLang,
   addTalentAccent,
   getTalentAccent,
-  deleteTalentAccent
+  deleteTalentAccent,
+  getSamplesByTalentId
 };
