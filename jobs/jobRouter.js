@@ -97,21 +97,26 @@ router.put('/complete/:id', async (req, res) => {
       .filter(offer => offer.status.toLowerCase() !== 'open' || offer.status.toLowerCase !== 'declined')
       .reverse()
     await Jobs.updateJob(id, {status: "Completed"})
-    await JobOffers.updateJobOffer(offers[0].jobOfferId, {status: "Completed"})
-    const client = ClientProfile.getClientProfileById(offers[0].clientId)
-    const talent = TalentProfile.getTalentProfileById(offers[0].talentId)
-    let clientLoyalty = client[0].loyaltyLevel
-    let talentLoyalty = talent[0].loyaltyLevel
-    if(10 <= client[0].completedJobs+1 <= 24) {
+    await JobOffers.updateJobOffer(offers[0].jobOfferId, {status: "Completed", completedDate: new Date()})
+    const client = await ClientProfiles.getClientProfileById(offers[0].clientId)
+    const talent = await TalentProfiles.getTalentProfileById(offers[0].talentId)
+    if(client[0].completedJobs+1 <= 9) {
+      clientLoyalty = 1
+    } else if(10 <= client[0].completedJobs+1 <= 24) {
       clientLoyalty = 2
     } else if(client[0].completedJobs+1 >= 25) {
       clientLoyalty = 3
     }
-    if(10 <= talent[0].completedJobs+1 <= 24) {
+    if(talent[0].completedJobs+1 <= 9) {
+      talentLoyalty = 1
+    } else if(10 <= talent[0].completedJobs+1 <= 24) {
       talentLoyalty = 2
     } else if(talent[0].completedJobs+1 >= 25) {
       talentLoyalty = 3
     }
+    let talentFee = talent[0].loyaltyLevel === 1 ? 0.1 : 
+            talent[0].loyaltyLevel === 2 ? 0.075 : 0.05
+    let talentBalance = parseFloat(talent[0].accountBalance) + parseFloat((offers[0].price - (offers[0].price * talentFee)))
     await Users.updateUser(client[0].userId, {
       completedJobs: client[0].completedJobs+1,
       loyaltyLevel: clientLoyalty
@@ -119,7 +124,12 @@ router.put('/complete/:id', async (req, res) => {
     await Users.updateUser(talent[0].userId, {
       completedJobs: talent[0].completedJobs+1,
       loyaltyLevel: talentLoyalty,
-      accountBalance: talent[0].accountBalance + offers[0].price
+      accountBalance: talentBalance
+    })
+    const admin = await Users.getUserById(5)
+    console.log(admin, parseFloat(offers[0].price * talentFee))
+    await Users.updateUser(5, {
+      accountBalance: parseFloat(admin.accountBalance) + parseFloat(offers[0].price * talentFee)
     })
     res.status(200).json({message: 'Successfully completed job ' + id + ' and it\'s related offer'})
   } catch(error) {

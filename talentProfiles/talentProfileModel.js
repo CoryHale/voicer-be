@@ -50,7 +50,9 @@ const getTalentProfiles = _ => {
       'u.username',
       'u.firstName',
       'u.lastName',
-      'u.email'
+      'u.email',
+      'u.loyaltyLevel',
+      'u.gender'
     )
 };
 
@@ -217,7 +219,6 @@ module.exports = {
   getTalentProfiles,
   getTalentProfileById,
   getTalentProfileByUserId,
-  getTalentProfileByTalentId,
   getLanguages,
   addLanguage,
   deleteLanguage,
