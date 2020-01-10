@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
         // Check if user exists, if so...
         if( user ) {
             // Pull all reviews from that specific user
-            const reviews = await Reviews.getReviewsByUserId(reviewData.authorId);
+            const reviews = await Reviews.getReviewsByAuthorId(reviewData.authorId);
             // Check if the review has already been left
             reviews.forEach(review => {
                 if (review.jobId === reviewData.jobId) {
