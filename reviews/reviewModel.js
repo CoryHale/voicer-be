@@ -54,6 +54,7 @@ const getReviewById = async (reviewId) => {
             'authors.username as authorUsername',
             'recipients.username as recipientUsername',
             'jobs.jobTitle',
+            'jobs.jobId',
             'reviews.rating',
             'reviews.message')
         .first();
@@ -75,6 +76,7 @@ const getReviewsByUserId = async (userId) => {
                 'authors.username as authorUsername',
                 'recipients.username as recipientUsername',
                 'jobs.jobTitle',
+                'jobs.jobId',
                 'reviews.rating',
                 'reviews.message');
         const receivedReviews = await db('reviews')
@@ -86,6 +88,7 @@ const getReviewsByUserId = async (userId) => {
                 'authors.username as authorUsername',
                 'recipients.username as recipientUsername',
                 'jobs.jobTitle',
+                'jobs.jobId',
                 'reviews.rating',
                 'reviews.message');
         return authoredReviews.concat(receivedReviews);
@@ -105,6 +108,7 @@ const getReviewsByAuthorId = async (authorId) => {
                 'authors.username as authorUsername',
                 'recipients.username as recipientUsername',
                 'jobs.jobTitle',
+                'jobs.jobId',
                 'reviews.rating',
                 'reviews.message');
         return reviews;
@@ -125,6 +129,7 @@ const getReviewsByRecipientId = async (recipientId) => {
                 'authors.username as authorUsername',
                 'recipients.username as recipientUsername',
                 'jobs.jobTitle',
+                'jobs.jobId',
                 'reviews.rating',
                 'reviews.message');
         return reviews;
@@ -145,6 +150,7 @@ const getReviewsByJobId = async (jobId) => {
                 'authors.username as authorUsername',
                 'recipients.username as recipientUsername',
                 'jobs.jobTitle',
+                'jobs.jobId',
                 'reviews.rating',
                 'reviews.message');
         return reviews;
