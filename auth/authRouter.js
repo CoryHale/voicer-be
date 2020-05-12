@@ -5,11 +5,15 @@ const jwt = require('jsonwebtoken');
 const Users = require('../users/userModel');
 
 router.post('/register', async (req, res) => {
+  console.log(req.body)
   const user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
+  console.log(hash)
   user.password = hash;
   try {
+    console.log("here")
     await Users.addUser(user);
+    console.log("here 2")
     res.status(201).json({ message: 'New User Registered', user: user });
   } catch (error) {
     res.status(500).json({ message: 'Could Not Register User', error: error });
