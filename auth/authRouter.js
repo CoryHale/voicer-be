@@ -24,10 +24,13 @@ router.post('/login', async (req, res) => {
   let { username, password } = req.body;
 
   try {
+    console.log("Checkpoint 1")
     const user = await Users.findBy({ username });
-
+    console.log("Checkpoint 2")
     if (user && bcrypt.compareSync(password, user.password)) {
+      console.log("Checkpoint 3")
       const token = genToken(user);
+      console.log("Checkpoint 4")
       const { userId, userType } = user;
       res.status(200).json({
         message: `Welcome ${user.username}!`,
